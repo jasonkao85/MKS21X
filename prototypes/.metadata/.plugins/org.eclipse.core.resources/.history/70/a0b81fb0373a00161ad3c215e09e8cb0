@@ -1,0 +1,5 @@
+package com.kao.src;
+
+public class RenderPanel extends JPanel {
+
+}

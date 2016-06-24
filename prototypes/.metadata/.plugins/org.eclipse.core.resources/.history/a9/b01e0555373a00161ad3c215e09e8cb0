@@ -1,0 +1,23 @@
+package com.kao.src;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+
+public class Snake {
+
+	public JFrame frame;
+	// constructor
+	public Snake() {
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame = new JFrame(/*title*/);
+		frame.setVisible(true);
+		frame.setSize(640,480);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public static void main(String args[]){
+		
+	}
+}

@@ -1,0 +1,13 @@
+package com.kao.src;
+
+public class Snake {
+
+	// constructor
+	public Snake() {
+		
+	}
+	
+	public static void main(String args[]){
+		
+	}
+}

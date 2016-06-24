@@ -1,0 +1,16 @@
+package com.kao.src;
+
+import javax.swing.JFrame;
+
+public class Snake {
+
+	public JFrame frame;
+	// constructor
+	public Snake() {
+		jframe = new JFrame();
+	}
+	
+	public static void main(String args[]){
+		
+	}
+}
