@@ -17,7 +17,7 @@ public class Paddle {
 		if (paddleNum == 1){
 			this.x = 0;
 		}
-		if (paddleNum == 2){
+		else if (paddleNum == 2){
 			this.x = pong.width - width;
 		}
 		this.y = pong.height / 2 - this.height / 2;
@@ -25,7 +25,8 @@ public class Paddle {
 
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.drawRect(x, y, width, height);	
+		g.drawRect(x, y, width, height);
+		
 	}
 
 }

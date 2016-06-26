@@ -15,10 +15,8 @@ public class Renderer extends JPanel {
 	 * paintComponent method is where all custom painting takes place.
 	 * It's only parameter, a Graphics object, exposes a number of methods for drawing 2D shapes
 	 */
-	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g); // super refers to the parent class (the one the current class extends (JPanel))
-		
 		Pong.pong.render(g);
 	}
 

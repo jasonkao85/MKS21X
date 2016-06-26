@@ -16,15 +16,13 @@ public class Pong implements ActionListener {
 	
 	public Renderer renderer; 
 	
-	public Paddle p1;
+	public Paddle p1, p2;
 	
-	public Paddle p2;
-	
-	/* Constructor provides initial values for class fields when you create the object */
+	/* constructor provides initial values for class fields when you create the object */
 	public Pong(){
 		/* The timer object tells ActionListener to fire an ActionEvent at the specified interval of 20 milliseconds */
-		Timer timer = new Timer(20, this);
-		JFrame jframe = new JFrame("Pong");
+		Timer timer = new Timer(20,this);
+		JFrame  jframe = new JFrame("Pong");
 		
 		renderer = new Renderer();
 		
@@ -49,7 +47,7 @@ public class Pong implements ActionListener {
 	
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, width, height);
+		g.fillRect(0, 0, 300, 300);
 		
 		p1.render(g);
 		p2.render(g);
@@ -58,12 +56,16 @@ public class Pong implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		update();
-		
 		renderer.repaint(); // repaint: in a frame, all components must be repainted
+		
 	}
 	
 	public static void main(String[] args) {
 		pong = new Pong();
 	}
+
 	
+
+	
+
 }

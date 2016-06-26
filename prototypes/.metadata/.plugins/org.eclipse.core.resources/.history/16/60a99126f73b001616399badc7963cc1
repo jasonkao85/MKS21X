@@ -23,7 +23,7 @@ public class Pong implements ActionListener {
 	/* Constructor provides initial values for class fields when you create the object */
 	public Pong(){
 		/* The timer object tells ActionListener to fire an ActionEvent at the specified interval of 20 milliseconds */
-		Timer timer = new Timer(20, this);
+		Timer timer = new Timer(20,this);
 		JFrame jframe = new JFrame("Pong");
 		
 		renderer = new Renderer();
@@ -65,5 +65,9 @@ public class Pong implements ActionListener {
 	public static void main(String[] args) {
 		pong = new Pong();
 	}
+
 	
+
+	
+
 }
