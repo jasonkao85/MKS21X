@@ -1,0 +1,16 @@
+package com.kao.src;
+
+public class Pong {
+	
+	public static Pong pong;
+	
+	// constructor runs first. 
+	public static Pong(){
+		
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}

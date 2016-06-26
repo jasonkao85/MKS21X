@@ -1,0 +1,9 @@
+package com.kao.src;
+
+public class Paddle {
+
+	public Paddle(int paddleNum) {
+		
+	}
+
+}

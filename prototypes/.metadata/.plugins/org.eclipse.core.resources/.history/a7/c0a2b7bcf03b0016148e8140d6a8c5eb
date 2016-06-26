@@ -1,0 +1,13 @@
+package com.kao.src;
+
+public class Paddle {
+	
+	public int paddleNum;
+	
+	public int x, y, width = 100, height = 500;
+
+	public Paddle(int paddleNum) {
+		this.paddleNum = paddleNum;
+	}
+
+}

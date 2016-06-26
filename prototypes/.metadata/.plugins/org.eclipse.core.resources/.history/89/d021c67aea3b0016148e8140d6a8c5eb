@@ -1,0 +1,31 @@
+package com.kao.src;
+
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+
+public class Pong {
+	
+	public static Pong pong;
+	
+	public int width = 700, height = 700;
+	
+	/* 1. constructor: provides initial values for class fields when you create the object */
+	public Pong(){
+		JFrame  jframe = new JFrame("Pong");
+		jframe.setSize(width,height);
+		jframe.setVisible(true);
+		jframe.add(renderer);
+	}
+	
+	public void render(Graphics g) {
+		
+	}
+
+	public static void main(String[] args) {
+		pong = new Pong();
+	}
+
+	
+
+}

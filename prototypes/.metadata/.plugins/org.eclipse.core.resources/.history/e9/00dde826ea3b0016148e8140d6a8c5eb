@@ -1,0 +1,24 @@
+package com.kao.src;
+
+import java.awt.Graphics;
+
+public class Pong {
+	
+	public static Pong pong;
+	
+	/* 1. constructor: provides initial values for class fields when you create the object */
+	public Pong(){
+		
+	}
+	
+public void render(Graphics g) {
+		
+	}
+
+	public static void main(String[] args) {
+		pong = new Pong();
+	}
+
+	
+
+}

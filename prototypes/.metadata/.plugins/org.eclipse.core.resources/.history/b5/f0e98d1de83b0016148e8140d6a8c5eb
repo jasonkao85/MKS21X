@@ -1,0 +1,10 @@
+package com.kao.src;
+
+import javax.swing.JPanel;
+
+public class Renderer extends JPanel {
+
+	/* serialVersionUID used to ID your class. If none, UID will change and Java won't let you reload old data*/
+	private static final long serialVersionUID = 1L;
+
+}

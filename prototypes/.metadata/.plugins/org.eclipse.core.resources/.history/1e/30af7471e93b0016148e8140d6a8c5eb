@@ -1,0 +1,16 @@
+package com.kao.src;
+
+import javax.swing.JPanel;
+
+public class Renderer extends JPanel {
+
+	/* serialVersionUID used to ID your class. If none, if class changes then UID will change and Java won't let you reload old data 
+	 * --> http://c2.com/ppr/wiki/JavaIdioms/AlwaysDeclareSerialVersionUid.html
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	protected void paintComponent(Graphics g){
+		super.paintComponent(g);
+	}
+
+}

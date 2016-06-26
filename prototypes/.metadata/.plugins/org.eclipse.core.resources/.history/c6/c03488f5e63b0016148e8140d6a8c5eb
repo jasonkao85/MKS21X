@@ -1,0 +1,15 @@
+package com.kao.src;
+
+public class Pong {
+	
+	public static Pong pong;
+	
+	public static Pong(){
+		
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}
