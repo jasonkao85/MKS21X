@@ -1,0 +1,19 @@
+package com.kao.src;
+
+import java.awt.Graphics2D;
+
+public class Ball {
+
+	public Ball() {
+		
+	}
+	
+	public void update(){
+		
+	}
+	
+	public void render(Graphics2D g){
+		
+	}
+
+}

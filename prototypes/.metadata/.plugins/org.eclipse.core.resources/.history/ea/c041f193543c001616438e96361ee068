@@ -1,0 +1,42 @@
+package com.kao.src;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.Random;
+
+public class Ball {
+	
+	public int x, y, width = 25, height = 25;
+	
+	public int motionX, motionY;
+	
+	public Random random;
+
+	public Ball() {
+		random = new Random();
+	}
+	
+	public void update(Paddle paddle1, Paddle paddle2){
+		if (checkCollision(paddle1) == 1) {
+			this.motionX = x;
+			this.motionY = -2 + Range.nextInt(4);
+		}
+	}
+	
+	public int checkCollision(Paddle paddle){
+		if (paddle.x > x || paddle.x < x + width){
+			if (paddle.y > y + height || paddle.y+ height < y) {
+				return 1; // hit wall
+			} else {
+				return 2; // hit paddle
+			}
+		}
+		return 0; // hit nothing
+	}
+	
+	public void render(Graphics2D g){
+		g.setColor(Color.WHITE);
+		g.fillOval(x, y, width, height);
+	}
+
+}

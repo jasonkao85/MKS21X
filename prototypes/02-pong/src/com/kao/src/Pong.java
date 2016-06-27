@@ -1,8 +1,9 @@
 package com.kao.src;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,9 +22,13 @@ public class Pong implements ActionListener, KeyListener {
 	
 	public Paddle p1, p2;
 	
+	public Ball ball;
+	
 	public boolean bot = false;
 	
 	public boolean w, s, up, down;
+	
+	public int gameStatus = 0; // 0 = stopped, 1 = paused, 2 = playing 
 	
 	/* Constructor provides initial values for class fields when you create the object */
 	public Pong(){
@@ -52,6 +57,7 @@ public class Pong implements ActionListener, KeyListener {
 	public void start(){
 		p1 = new Paddle(this, 1);
 		p2 = new Paddle(this, 2);
+		ball = new Ball(this);
 	}
 	
 	public void update(){
@@ -72,18 +78,41 @@ public class Pong implements ActionListener, KeyListener {
 	public void render(Graphics2D g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
+		// g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		if (gameStatus == 0) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font(null, 1, 28));
+			g.drawString("PONG", width / 2 - 22,height / 2 - 18);
+			
+			g.setFont(new Font(null, 1, 12));
+			g.drawString("Press Space for singleplayer.", width / 2 - 40,height / 2 + 10);
+			
+			g.setFont(new Font(null, 1, 12));
+			g.drawString("Press Shift for multiplayer.", width / 2 - 50,height / 2 + 30);
+		}
+		if (gameStatus == 1 || gameStatus == 2) {
+			g.setColor(Color.WHITE);
+			// g.setStroke(new BasicStroke(5f));
+			g.drawLine(width / 2, 0, width / 2, height);
+			
+			p1.render(g);
+			p2.render(g);
+			ball.render(g);
+		}
+		if (gameStatus == 1) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font(null, 1, 24));
+			g.drawString("PAUSED", width / 2 - 40,height / 2 - 10);
+		}
 		
-		g.setColor(Color.WHITE);
-		// g.setStroke(new BasicStroke(5f));
-		g.drawLine(width / 2, 0, width / 2, height);
-		
-		p1.render(g);
-		p2.render(g);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		update();
+		if (gameStatus == 2) {
+			update();			
+		}
 		
 		renderer.repaint(); // repaint: in a frame, all components must be repainted
 	}

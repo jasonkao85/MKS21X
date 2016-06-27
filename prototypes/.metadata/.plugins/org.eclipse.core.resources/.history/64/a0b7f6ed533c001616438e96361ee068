@@ -1,0 +1,26 @@
+package com.kao.src;
+
+import java.awt.Graphics2D;
+
+public class Ball {
+	
+	public int x, y, width, height;
+
+	public Ball() {
+		
+	}
+	
+	public void update(Paddle paddle1, Paddle paddle2){
+		if (paddle1.x > x) {
+			
+		}
+		if (paddle1.x < x + width) {
+			
+		}
+	}
+	
+	public void render(Graphics2D g){
+		
+	}
+
+}
