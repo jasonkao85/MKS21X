@@ -63,7 +63,7 @@ public class Ball {
 				return 2; // hit paddle
 			}
 		}
-		return 0; // hit nothing 
+		return 0; // hit nothing
 	}
 	
 	public void render(Graphics2D g){
