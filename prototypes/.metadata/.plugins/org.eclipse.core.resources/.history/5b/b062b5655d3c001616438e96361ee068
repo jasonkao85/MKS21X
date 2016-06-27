@@ -53,7 +53,6 @@ public class Pong implements ActionListener, KeyListener {
 	}
 	
 	public void start() {
-		gameStatus = 2;
 		p1 = new Paddle(this, 1);
 		p2 = new Paddle(this, 2);
 		ball = new Ball(this);
@@ -72,8 +71,6 @@ public class Pong implements ActionListener, KeyListener {
 		if (down) {
 			p2.move(false);
 		}
-		
-		ball.update(p1, p2);
 	}
 	
 	public void render(Graphics2D g) {
@@ -156,7 +153,6 @@ public class Pong implements ActionListener, KeyListener {
 		if (id == KeyEvent.VK_SPACE) {
 			if (gameStatus  == 0) {
 				gameStatus = 2;
-				start();
 			} else if (gameStatus == 1) {
 				gameStatus = 2;
 			} else if (gameStatus == 2) {

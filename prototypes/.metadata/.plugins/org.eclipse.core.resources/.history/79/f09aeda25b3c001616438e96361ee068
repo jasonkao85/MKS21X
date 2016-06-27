@@ -48,12 +48,13 @@ public class Pong implements ActionListener, KeyListener {
 		jframe.addKeyListener(this);
 		
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // window opens in the middle
-				
+		
+		start();
+		
 		timer.start();
 	}
 	
 	public void start() {
-		gameStatus = 2;
 		p1 = new Paddle(this, 1);
 		p2 = new Paddle(this, 2);
 		ball = new Ball(this);
@@ -72,8 +73,6 @@ public class Pong implements ActionListener, KeyListener {
 		if (down) {
 			p2.move(false);
 		}
-		
-		ball.update(p1, p2);
 	}
 	
 	public void render(Graphics2D g) {
@@ -93,11 +92,9 @@ public class Pong implements ActionListener, KeyListener {
 			g.drawString("Press Shift for multiplayer.", width / 2 - 65,height / 2 + 45);
 		}
 		if (gameStatus == 1 || gameStatus == 2) {
-			/* White line down the middle:
 			g.setColor(Color.WHITE);
-			g.setStroke(new BasicStroke(5f));
+			// g.setStroke(new BasicStroke(5f));
 			g.drawLine(width / 2, 0, width / 2, height);
-			*/
 			
 			p1.render(g);
 			p2.render(g);
@@ -106,7 +103,7 @@ public class Pong implements ActionListener, KeyListener {
 		if (gameStatus == 1) {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font(null, 1, 24));
-			g.drawString("PAUSED", width / 2 - 48,height / 2 - 30);
+			g.drawString("PAUSED", width / 2 - 40,height / 2 - 10);
 		}
 		
 	}
@@ -147,22 +144,7 @@ public class Pong implements ActionListener, KeyListener {
 			down = true;
 		}
 		
-		if (id == KeyEvent.VK_SHIFT && gameStatus == 0) {
-			bot = true;
-			gameStatus = 2;
-			start();
-		}
 		
-		if (id == KeyEvent.VK_SPACE) {
-			if (gameStatus  == 0) {
-				gameStatus = 2;
-				start();
-			} else if (gameStatus == 1) {
-				gameStatus = 2;
-			} else if (gameStatus == 2) {
-				gameStatus = 1;
-			} 
-		}
 	}
 
 	@Override
@@ -181,7 +163,15 @@ public class Pong implements ActionListener, KeyListener {
 		if (id == KeyEvent.VK_DOWN) {
 			down = false;
 		}
-		
+		if (id == KeyEvent.VK_SPACE) {
+			if (gameStatus  == 0) {
+				gameStatus = 2;
+			} else if (gameStatus == 2) {
+				gameStatus = 1;
+			} else if (gameStatus == 1) {
+				gameStatus = 2;
+			}
+		}
 		
 	}
 	

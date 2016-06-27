@@ -36,17 +36,9 @@ public class Ball {
 		if (checkCollision(paddle1) == 1) {
 			this.motionX = 1;
 			this.motionY = -2 + random.nextInt(4);
-			
-			if (motionY == 0) {
-				motionY = 1;
-			}
 		} else if (checkCollision(paddle2) == 1) {
 			this.motionX = -1;
 			this.motionY = -2 + random.nextInt(4);
-			
-			if (motionY == 0) {
-				motionY = 1;
-			}
 		}
 		if (checkCollision(paddle1) == 2) {
 			paddle2.score++;
