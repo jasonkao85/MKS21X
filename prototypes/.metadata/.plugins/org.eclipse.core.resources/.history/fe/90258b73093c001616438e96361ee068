@@ -30,7 +30,7 @@ public class Pong implements ActionListener {
 		
 		jframe.pack(); // used to reposition window
 		jframe.setVisible(true);
-		jframe.setSize(700,700);
+		jframe.setSize(800,600);
 		jframe.setResizable(false);
 		jframe.setLocationRelativeTo(null); // window opens in the middle
 		

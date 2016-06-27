@@ -7,7 +7,7 @@ public class Paddle {
 	
 	public int paddleNum;
 	
-	public int x, y, width = 30, height = 170, distanceFromBorder = 20;
+	public int x, y, width = 50, height = 300, distanceFromBorder = 20;
 	
 	public int score;
 

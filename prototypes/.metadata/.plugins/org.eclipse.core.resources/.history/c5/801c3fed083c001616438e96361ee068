@@ -7,7 +7,7 @@ public class Paddle {
 	
 	public int paddleNum;
 	
-	public int x, y, width = 30, height = 170, distanceFromBorder = 20;
+	public int x, y, width = 50, height = 300;
 	
 	public int score;
 
@@ -15,17 +15,17 @@ public class Paddle {
 		this.paddleNum = paddleNum;
 		
 		if (paddleNum == 1){
-			this.x = 0 + distanceFromBorder;
+			this.x = 0;
 		}
 		if (paddleNum == 2){
-			this.x = pong.width - width - distanceFromBorder;
+			this.x = pong.width - width;
 		}
 		this.y = pong.height / 2 - this.height / 2;
 	}
 
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.fillRect(x, y, width, height);	
+		g.drawRect(x, y, width, height);	
 	}
 
 }
