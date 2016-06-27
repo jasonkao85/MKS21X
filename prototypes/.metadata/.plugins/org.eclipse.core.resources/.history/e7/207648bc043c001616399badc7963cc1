@@ -10,7 +10,7 @@ import javax.swing.Timer;
 
 public class Pong implements ActionListener {
 	
-	public static Pong pong = new Pong();
+	public static Pong pong;
 	
 	public int width = 700, height = 700;
 	
@@ -32,7 +32,7 @@ public class Pong implements ActionListener {
 		
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.add(renderer);
-		jframe.setVisible(true);
+		
 		
 		start();
 		
