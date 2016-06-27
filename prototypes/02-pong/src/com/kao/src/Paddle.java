@@ -28,4 +28,23 @@ public class Paddle {
 		g.fillRect(x, y, width, height);	
 	}
 
+	public void move(boolean up) {
+		int speed = 10;
+		
+		if (up){
+			if (y - speed > 0){
+				y -= speed;
+			} else {
+				y = 0;
+			}
+		} else {
+			if (y + height + speed < Pong.pong.height - 22){
+				y += speed;
+			} else{
+				y = Pong.pong.height - height - 22;
+			}
+		}
+		
+	}
+
 }
