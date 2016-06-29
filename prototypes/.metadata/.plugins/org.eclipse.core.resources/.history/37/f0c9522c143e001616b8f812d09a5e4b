@@ -1,0 +1,14 @@
+package com.kao.src;
+
+public class Astroparty {
+
+	public Astroparty() {
+		JFrame jframe = JFrame();
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

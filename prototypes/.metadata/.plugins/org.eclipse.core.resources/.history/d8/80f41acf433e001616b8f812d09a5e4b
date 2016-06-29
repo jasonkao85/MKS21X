@@ -1,0 +1,14 @@
+package com.kao.src;
+
+public class Cow {
+
+	public Cow() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

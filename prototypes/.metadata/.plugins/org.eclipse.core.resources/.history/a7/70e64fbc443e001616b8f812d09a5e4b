@@ -1,0 +1,19 @@
+package com.kao.src;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Fighter {
+	
+	public int x, y, width = 10, height = 50;
+
+	public Fighter(int fighterNumber) {
+		
+	}
+	
+	public void render(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(x, y, width, height);	
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.kao.src;
+
+public class Renderer extends JPanel {
+
+	public Renderer() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

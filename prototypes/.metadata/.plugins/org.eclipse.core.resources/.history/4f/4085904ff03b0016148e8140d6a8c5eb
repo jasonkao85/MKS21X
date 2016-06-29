@@ -1,9 +1,0 @@
-package com.kao.src;
-
-public class Paddle {
-
-	public Paddle() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

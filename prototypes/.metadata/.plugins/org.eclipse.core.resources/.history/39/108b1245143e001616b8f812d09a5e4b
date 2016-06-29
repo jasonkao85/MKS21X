@@ -1,0 +1,23 @@
+package com.kao.src;
+
+import javax.swing.JFrame;
+
+public class Astroparty {
+
+	public Astroparty() {
+		
+		JFrame jframe = JFrame();
+		
+		jframe.pack(); // used to reposition window
+		jframe.setVisible(true);
+		jframe.setSize(width, height);
+		jframe.setResizable(false);
+		jframe.setLocationRelativeTo(null);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
