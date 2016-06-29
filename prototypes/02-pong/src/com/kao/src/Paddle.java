@@ -7,9 +7,15 @@ public class Paddle {
 	
 	public int paddleNum;
 	
-	public int x, y, width = 30, height = 170, distanceFromBorder = 20;
+	public int x, y, width = 30, height = 170;
+
+	public static int distanceFromBorder = 20;
 	
 	public int score;
+	
+	public static int speed = 5;
+	
+	
 
 	public Paddle(Pong pong, int paddleNum) {
 		this.paddleNum = paddleNum;
@@ -29,7 +35,6 @@ public class Paddle {
 	}
 
 	public void move(boolean up) {
-		int speed = 3;
 		
 		if (up){
 			if (y - speed > 0){
@@ -38,10 +43,10 @@ public class Paddle {
 				y = 0;
 			}
 		} else {
-			if (y + height + speed < Pong.pong.height - 22){
+			if (y + height + speed < Pong.pong.height - Pong.windowCorrectionBottom){
 				y += speed;
 			} else{
-				y = Pong.pong.height - height - 22;
+				y = Pong.pong.height - height - Pong.windowCorrectionBottom;
 			}
 		}
 		

@@ -11,9 +11,71 @@ public class Ball {
 	public int motionX, motionY;
 	
 	public Random random;
+	
+	private Pong pong;
+	
+	public int amountOfHits;
 
 	public Ball(Pong pong) {
-		random = new Random();
+		
+		this.pong = pong;
+		
+		this.random = new Random();
+		
+		spawn();
+	}
+	
+	public void update(Paddle paddle1, Paddle paddle2){
+		this.x += motionX * 3;
+		this.y += motionY * 3;
+		
+		// collision with top or bottom
+		if (this.y + motionY < 0 || this.y + height  - motionY > pong.height) {
+			if (this.motionY < 0) {
+				this.y = 0;
+				this.motionY = random.nextInt(4); // if going up, now go down
+				
+				if (motionY == 0) {
+					motionY = 1;
+				}
+			} else {
+				this.motionY = -random.nextInt(4);	
+				this.y = pong.height - height;
+				
+				if (motionY == 0) {
+					motionY = -1;
+				}
+			}
+		}
+		
+		if (checkCollision(paddle1) == 1) {
+			this.motionX = 1 + amountOfHits / 5;
+			this.motionY = -2 + random.nextInt(4);
+			
+			if (motionY == 0) {
+				motionY = 1;
+			}
+			
+			amountOfHits++;
+		} else if (checkCollision(paddle2) == 1) {
+			this.motionX = -1 - amountOfHits / 5;
+			this.motionY = -2 + random.nextInt(4);
+			
+			if (motionY == 0) {
+				motionY = 1;
+			}
+			amountOfHits++;
+		}
+		if (checkCollision(paddle1) == 2) {
+			paddle2.score++;
+			spawn();
+		} else if (checkCollision(paddle2) == 2) {
+			paddle1.score++;
+			spawn();
+		}
+	}
+	
+	public void spawn() {
 		this.x = pong.width / 2 - this.width / 2;
 		this.y = pong.height / 2 - this.height / 2;
 		
@@ -25,43 +87,16 @@ public class Ball {
 		if (motionY == 0) {
 			motionY = 1;
 		}
-		
 		this.motionY = -2 + random.nextInt(4);
-	}
-	
-	public void update(Paddle paddle1, Paddle paddle2){
-		this.x += motionX;
-		this.y += motionY;
 		
-		if (checkCollision(paddle1) == 1) {
-			this.motionX = 1;
-			this.motionY = -2 + random.nextInt(4);
-			
-			if (motionY == 0) {
-				motionY = 1;
-			}
-		} else if (checkCollision(paddle2) == 1) {
-			this.motionX = -1;
-			this.motionY = -2 + random.nextInt(4);
-			
-			if (motionY == 0) {
-				motionY = 1;
-			}
-		}
-		if (checkCollision(paddle1) == 2) {
-			paddle2.score++;
-		} else if (checkCollision(paddle2) == 2) {
-			paddle1.score++;
-		}
+		this.amountOfHits = 0;
 	}
 	
 	public int checkCollision(Paddle paddle){
-		if (paddle.x > x || paddle.x < x + width){
-			if (paddle.y > y + height || paddle.y+ height < y) {
-				return 1; // hit paddle
-			} else {
-				return 2; // hit paddle
-			}
+		if (this.x < paddle.x + paddle.width && this.x + width > paddle.x && this.y < paddle.y + paddle.height && this.y + height > paddle.y) {
+			return 1; // paddle
+		} else if ((paddle.x - Paddle.distanceFromBorder> x && paddle.paddleNum == 1) || (paddle.x + paddle.width + Paddle.distanceFromBorder < x + width && paddle.paddleNum == 2)) {
+			return 2; // hit side walls
 		}
 		return 0; // hit nothing 
 	}
