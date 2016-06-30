@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Fighter {
 	
-	public int x, y, width = 10, height = 10;
+	public int x, y, width = 20, height = 20;
 	
 	public double angle = 0;
 	
@@ -13,10 +13,14 @@ public class Fighter {
 	
 	public Double velX, velY;
 		
-	public double speedForward = .5, speedRotate;
+	public static double speedForward = .35, speedMilk = .9, speedRotate;
 	
 	public int distanceFromBorder = 20, windowCorrectionBottom = 60;
-
+	
+	public static Milk blobA, blobB, blobC;
+	public static Milk[] blobs = {blobA, blobB, blobC};
+	public static int ammo = blobs.length;
+	
 	public Fighter(Cow cow, int fighterNumber) {
 		
 		switch (fighterNumber) {
@@ -40,8 +44,6 @@ public class Fighter {
 			velX *= -1;
 			velY *= -1;
 			break;
-		default:
-			System.out.println("Invalid number of players.");
 		}
 	}
 	
@@ -66,6 +68,10 @@ public class Fighter {
 			x += motionX;
 			y += motionY;
 		}
+	}
+	
+	public void shoot() {
+
 	}
 	
 	public void render(Graphics g) {
