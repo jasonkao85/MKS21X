@@ -1,0 +1,17 @@
+package com.kao.src;
+
+public class BlobStorage {
+
+	public BlobStorage() {
+		
+	}
+	
+	public void removeBullet() {
+		
+	}
+	
+	public void addBullet() {
+		
+	}
+
+}

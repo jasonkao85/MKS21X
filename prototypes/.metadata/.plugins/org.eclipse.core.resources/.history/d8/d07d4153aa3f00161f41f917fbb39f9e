@@ -1,0 +1,21 @@
+package com.kao.src;
+
+public class BlobStorage {
+
+	public BlobStorage(Fighter fighter) {
+		
+	}
+	
+	public void removeBullet() {
+		
+	}
+	
+	public void addBullet() {
+		
+	}
+	
+	public void reloadBullet() {
+		
+	}
+
+}
