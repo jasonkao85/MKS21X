@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -20,10 +18,9 @@ public class Cow implements ActionListener, KeyListener {
 	public Renderer renderer;
 	public static Fighter[] players;
 	
-	public int tracker = 0;
-	public int menuPlayers = 2;
+	public int numberOfPlayers = 2;
 	
-	public int gameStatus = 0; // 0 = menu
+	public int gameStatus = 0; // 0 = menu, 1 = playing, 2 = paused
 	
 	public boolean shot = false;
 	
@@ -48,24 +45,45 @@ public class Cow implements ActionListener, KeyListener {
 		jframe.addKeyListener(this);
 		
 		timer.start();
+		start();
 	}
 	
 	public void start() {
 		gameStatus = 1;
 		
-		players = new Fighter[menuPlayers];
-		for (int i = 0; i < menuPlayers; i++) {
+		players = new Fighter[numberOfPlayers];
+		for (int i = 0; i < numberOfPlayers; i++) {
 			players[i] = new Fighter(this, i + 1);
 		}
 				
+	}
+	
+	public void getHit() {
+		
+		for (int currentPlayer = 0; currentPlayer < numberOfPlayers; currentPlayer++) 
+		{
+			for (int currentEnemy = 0; currentEnemy < numberOfPlayers; currentEnemy++) 
+			{
+				if (currentEnemy != currentPlayer) 
+				{
+					int[] collisionStatus = players[currentEnemy].hit(players[currentPlayer]);
+					if (collisionStatus[0] == 1) // collided
+					{
+						players[currentPlayer].livingStatus -= 1;
+						players[currentEnemy].shotLeft[collisionStatus[1]] = false;
+						System.out.println(players[currentPlayer].livingStatus);
+					} 
+				}
+			}
+
+		}
 	}
 	
 	public void render(Graphics2D g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
 		
-		switch (gameStatus) {
-		case 0:
+		if (gameStatus == 0) {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font(null, 1, 28));
 			g.drawString("COW", width / 2 - 18,height / 2 - 18);
@@ -74,28 +92,45 @@ public class Cow implements ActionListener, KeyListener {
 			g.drawString("Press Enter for multiplayer.", width / 2 - 70,height / 2 + 20);
 			
 			g.setFont(new Font(null, 1, 12));
-			g.drawString("> "+String.valueOf(menuPlayers)+" players", width / 2 - 18,height / 2 + 48);
-			break;
-		case 1:
-			for (int i = 0; i < menuPlayers; i++) {
-				players[i].render(g);
-				for (int j = 0; j < tracker; j++) {
-					players[j].blobs[j].render(g);
+			g.drawString("> "+String.valueOf(numberOfPlayers)+" players", width / 2 - 18,height / 2 + 48);
+		} 
+		if (gameStatus == 1 || gameStatus == 2) 
+		{
+			for (int playerNumber = 0; playerNumber < numberOfPlayers; playerNumber++) 
+			{
+				players[playerNumber].render(g);
+				for (int blobNumber = 0; blobNumber < Fighter.maxAmmo - players[playerNumber].ammo; blobNumber++) 
+				{
+					if (players[playerNumber].shotLeft[blobNumber]) {
+						players[playerNumber].blobs[blobNumber].render(g);
+					}
 				}
 			}
-			break;
+		}
+		if (gameStatus == 2) {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font(null, 1, 28));
+			g.drawString("PAUSED", width / 2 - 48,height / 2 - 18);
 		}
 		
 		
 	}
 	
 	public void update() {
-		for (int i = 0; i < menuPlayers; i++) {
-			players[i].move();
-			for (int j = 0; j < tracker; j++) {
-				players[j].blobs[j].move();
+		
+		// moves every player in players and every blob in player's blobs
+		for (int playerNumber = 0; playerNumber < numberOfPlayers; playerNumber++) 
+		{
+			players[playerNumber].move();
+			for (int blobNumber = 0; blobNumber < 3 - players[playerNumber].ammo; blobNumber++) 
+			{
+				if (players[playerNumber].shotLeft[blobNumber]) {
+					players[playerNumber].blobs[blobNumber].move();
+				}
 			}
 		}
+		
+		getHit();
 	}
 
 	public static void main(String[] args) throws ScriptException {
@@ -125,29 +160,49 @@ public class Cow implements ActionListener, KeyListener {
 			if (id == KeyEvent.VK_ENTER) {
 				start();
 			} else if (id == KeyEvent.VK_RIGHT) {
-				if (menuPlayers == 4) {
-					menuPlayers = 2;
+				if (numberOfPlayers == 4) {
+					numberOfPlayers = 2;
 				} else {
-					menuPlayers++;
+					numberOfPlayers++;
 				}
 			}
+			break;
+			
 		case 1:
+			
 			if (id == KeyEvent.VK_SPACE) {
+				gameStatus = 2;
+			}
+			
+			if (id == KeyEvent.VK_A) {
 				players[0].turning = true;
-			} else if (id == KeyEvent.VK_A) {
-				players[0].blobs[tracker] = new Milk(players[0]);
-
-				tracker++;
+			} else if (id == KeyEvent.VK_S) {
+				players[0].shoot();
+			}
+			if (id == KeyEvent.VK_B) {
+				players[1].turning = true;
+			} else if (id == KeyEvent.VK_N) {
+				players[1].shoot();
+			} 
+			break;
+		
+		case 2:
+			if (id == KeyEvent.VK_SPACE) {
+				gameStatus = 1;
 			}
 		}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int id = e.getKeyCode();
 			
-		if (id == KeyEvent.VK_SPACE) {
+		if (id == KeyEvent.VK_A) {
 			players[0].turning = false;
+		}
+		if (id == KeyEvent.VK_B) {
+			players[1].turning = false;
 		}
 	}
 
