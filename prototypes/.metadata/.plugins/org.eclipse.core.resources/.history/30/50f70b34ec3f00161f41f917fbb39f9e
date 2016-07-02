@@ -1,8 +1,10 @@
 package com.kao.src;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -102,7 +104,12 @@ public class Pong implements ActionListener, KeyListener {
 			g.drawString("Press Shift for multiplayer.", width / 2 - 65,height / 2 + 45);
 		}
 		if (gameStatus == 1 || gameStatus == 2) {
-
+			/* White line down the middle: *
+			g.setColor(Color.WHITE);
+			g.setStroke(new BasicStroke(5f));
+			g.drawLine(width / 2, 20, width / 2, 80);
+			*/
+			
 			g.setColor(Color.WHITE);
 			g.setFont(new Font(null, 1, 28));
 			g.drawString(String.valueOf(p1.score), width / 2 - 40, 60);

@@ -23,7 +23,7 @@ public class Cow implements ActionListener, KeyListener {
 	public static Cow cow = new Cow();
 	public Renderer renderer;
 	public static ArrayList<Fighter> players;
-	public static int[] scores;
+	public int[] scores;
 
 	public Cow() {
 		
@@ -77,13 +77,12 @@ public class Cow implements ActionListener, KeyListener {
 		
 		if (gameStatus == 1 || gameStatus == 2) 
 		{
-			for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) {
+			for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) 
+			{
 				players.get(playerNumber).render(g);
-			}
-			for (int playerNumber = 0; playerNumber < numberOfPlayers; playerNumber++) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font(null, 1, 28));
-				g.drawString(String.valueOf(scores[playerNumber]), width / 2, 60 + 30 * playerNumber);
+				g.drawString(String.valueOf(players.get(0).score), width / 2, 60 + 20 * i);
 			}
 		}
 		

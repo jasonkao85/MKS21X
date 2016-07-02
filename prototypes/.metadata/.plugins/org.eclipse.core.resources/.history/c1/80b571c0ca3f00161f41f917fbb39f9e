@@ -120,6 +120,8 @@ public class Fighter {
 						height = 12;		
 					} else if (livingStatus == 0) {
 						Cow.scores[currentEnemy] += 1;
+						Cow.players.remove(fighterNumber);
+						break;
 					}
 				} 
 			}
@@ -143,33 +145,30 @@ public class Fighter {
 	
 	public void render(Graphics g) {
 		
-		if (livingStatus > 0) 
-		{
-			g.setColor(Color.WHITE);
-			g.fillOval(x, y, width, height);
-			
-			for (int blobNumber = 0; blobNumber < ammoLeft; blobNumber++) {
-				switch (blobNumber) {
-				case 0:
-					g.setColor(Color.WHITE);
-					g.fillRect(x, y - ammoBulletRadius, 2, 2);
-					break;
-				case 1:
-					g.setColor(Color.WHITE);
-					g.fillRect(x - ammoBulletRadius / 2, y + ammoBulletRadius / 2, 2, 2);
-					break;
-				case 2:
-					g.setColor(Color.WHITE);
-					g.fillRect(x + ammoBulletRadius / 2, y - ammoBulletRadius / 2, 2, 2);
-					break;
-				}
-			}
-			
-			for (int blobNumber = 0; blobNumber < blobs.size(); blobNumber++) {
-				blobs.get(blobNumber).render(g);
+		g.setColor(Color.WHITE);
+		g.fillOval(x, y, width, height);
+		
+		for (int blobNumber = 0; blobNumber < ammoLeft; blobNumber++) {
+			switch (blobNumber) {
+			case 0:
+				g.setColor(Color.WHITE);
+				g.fillRect(x, y - ammoBulletRadius, 2, 2);
+				break;
+			case 1:
+				g.setColor(Color.WHITE);
+				g.fillRect(x - ammoBulletRadius / 2, y + ammoBulletRadius / 2, 2, 2);
+				break;
+			case 2:
+				g.setColor(Color.WHITE);
+				g.fillRect(x + ammoBulletRadius / 2, y - ammoBulletRadius / 2, 2, 2);
+				break;
 			}
 		}
-			
+		
+		for (int blobNumber = 0; blobNumber < blobs.size(); blobNumber++) {
+			blobs.get(blobNumber).render(g);
+		}
+		
 	}
 
 }
