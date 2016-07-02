@@ -171,10 +171,7 @@ public class Cow implements ActionListener, KeyListener {
 			{
 				if (id == players.get(playerNumber).keyEvents[0]) {
 					players.get(playerNumber).turning = true;
-				} 
-				
-				if (id == players.get(playerNumber).keyEvents[1]) 
-				{
+				} else if (id == players.get(playerNumber).keyEvents[1]) {
 					if (players.get(playerNumber).globuleActive) {
 						players.get(playerNumber).globuleMoving = true;
 					} else {
@@ -203,10 +200,10 @@ public class Cow implements ActionListener, KeyListener {
 			{
 				if (id == players.get(playerNumber).keyEvents[0]) {
 					players.get(playerNumber).turning = false;
-				} 
-				if (id == players.get(playerNumber).keyEvents[1] && players.get(playerNumber).globuleActive) {
-					players.get(playerNumber).globuleMoving = false;
-					
+				} else if (id == players.get(playerNumber).keyEvents[1]) {
+					if (players.get(playerNumber).globuleActive) {
+						players.get(playerNumber).globuleMoving = false;
+					} 
 				}
 			}
 		}

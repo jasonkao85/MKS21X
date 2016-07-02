@@ -67,30 +67,49 @@ public class Fighter {
 			angle += Math.PI * speedRotate / 40;
 		}
 		
-		velX = new Double(Math.cos(angle) * 10);
-		motionX = (int) (velX.intValue() * speedForward);
-		velY = new Double(Math.sin(angle) * 10); 
-		motionY = (int) (velY.intValue() * speedForward);
-		
-		boolean outX = x + motionX < 0 || x + width + motionX > Cow.cow.width;
-		boolean outY = y + motionX < 0 || y + height + motionY > Cow.cow.height - windowCorrectionBottom;
-		
 		if (globuleActive) 
 		{
 			if (globuleMoving) {
-				if (outX) {y += motionY;} 
-				else if (outY) {x += motionX;}
-				else {x += motionX; y += motionY;}
-			} else {
-				if (motionX > 0) {motionX--;}
-				if (motionY > 0) {motionY--;}
+				velX = new Double(Math.cos(angle) * 10);
+				motionX = (int) (velX.intValue() * speedForward);
+				velY = new Double(Math.sin(angle) * 10); 
+				motionY = (int) (velY.intValue() * speedForward);
+				
+				boolean outX = x + motionX < 0 || x + width + motionX > Cow.cow.width;
+				boolean outY = y + motionX < 0 || y + height + motionY > Cow.cow.height - windowCorrectionBottom;
+				
+				if (outX) {
+					y += motionY;
+				} else if (outY) {
+					x += motionX;
+				} else if (outX && outY) {
+					
+				} else {
+					x += motionX;
+					y += motionY;
+				}
 			}
 		}
 		else 
-		{	
-			if (outX) {y += motionY;} 
-			else if (outY) {x += motionX;}
-			else {x += motionX; y += motionY;}
+		{
+			velX = new Double(Math.cos(angle) * 10);
+			motionX = (int) (velX.intValue() * speedForward);
+			velY = new Double(Math.sin(angle) * 10); 
+			motionY = (int) (velY.intValue() * speedForward);
+						
+			boolean outX = x + motionX < 0 || x + width + motionX > Cow.cow.width;
+			boolean outY = y + motionX < 0 || y + height + motionY > Cow.cow.height - windowCorrectionBottom;
+			
+			if (outX) {
+				y += motionY;
+			} else if (outY) {
+				x += motionX;
+			} else if (outX && outY) {
+				
+			} else {
+				x += motionX;
+				y += motionY;
+			}
 		}
 	}
 	

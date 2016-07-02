@@ -12,9 +12,9 @@ public class Fighter {
 	public int globuleSize = 12, ammoIndicatorSize = 3, ammoIndicatorDistance = 20;
 	
 	public double angle, speedForward = .35, speedMilk = .8, speedRotate = 1;
-	public boolean turning = false, globuleActive = false, globuleMoving = false;
+	public boolean turning = false, globuleActive = false, globuleMoving = false;;
 	
-	public int motionX, motionY, globuleSpeedX, globuleSpeedY;
+	public int motionX, motionY;
 	public Double velX, velY;
 			
 	public static int distanceFromBorder = 20, windowCorrectionBottom = 22;
@@ -66,31 +66,24 @@ public class Fighter {
 		if (turning) {
 			angle += Math.PI * speedRotate / 40;
 		}
-		
+				
 		velX = new Double(Math.cos(angle) * 10);
-		motionX = (int) (velX.intValue() * speedForward);
+		int motionX = (int) (velX.intValue() * speedForward);
 		velY = new Double(Math.sin(angle) * 10); 
-		motionY = (int) (velY.intValue() * speedForward);
+		int motionY = (int) (velY.intValue() * speedForward);
 		
 		boolean outX = x + motionX < 0 || x + width + motionX > Cow.cow.width;
 		boolean outY = y + motionX < 0 || y + height + motionY > Cow.cow.height - windowCorrectionBottom;
 		
-		if (globuleActive) 
-		{
-			if (globuleMoving) {
-				if (outX) {y += motionY;} 
-				else if (outY) {x += motionX;}
-				else {x += motionX; y += motionY;}
-			} else {
-				if (motionX > 0) {motionX--;}
-				if (motionY > 0) {motionY--;}
-			}
-		}
-		else 
-		{	
-			if (outX) {y += motionY;} 
-			else if (outY) {x += motionX;}
-			else {x += motionX; y += motionY;}
+		if (outX) {
+			y += motionY;
+		} else if (outY) {
+			x += motionX;
+		} else if (outX && outY) {
+			
+		} else {
+			x += motionX;
+			y += motionY;
 		}
 	}
 	

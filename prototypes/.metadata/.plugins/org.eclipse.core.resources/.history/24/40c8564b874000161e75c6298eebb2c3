@@ -132,7 +132,7 @@ public class Cow implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (gameStatus == 1) {
-			update();
+			//update();
 		}
 		renderer.repaint();
 	}
@@ -171,15 +171,8 @@ public class Cow implements ActionListener, KeyListener {
 			{
 				if (id == players.get(playerNumber).keyEvents[0]) {
 					players.get(playerNumber).turning = true;
-				} 
-				
-				if (id == players.get(playerNumber).keyEvents[1]) 
-				{
-					if (players.get(playerNumber).globuleActive) {
-						players.get(playerNumber).globuleMoving = true;
-					} else {
-						players.get(playerNumber).shoot();
-					}
+				} else if (id == players.get(playerNumber).keyEvents[1]) {
+					players.get(playerNumber).shoot();
 				}
 			}
 		}
@@ -203,10 +196,6 @@ public class Cow implements ActionListener, KeyListener {
 			{
 				if (id == players.get(playerNumber).keyEvents[0]) {
 					players.get(playerNumber).turning = false;
-				} 
-				if (id == players.get(playerNumber).keyEvents[1] && players.get(playerNumber).globuleActive) {
-					players.get(playerNumber).globuleMoving = false;
-					
 				}
 			}
 		}

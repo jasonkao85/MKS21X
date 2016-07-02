@@ -78,19 +78,21 @@ public class Fighter {
 		if (globuleActive) 
 		{
 			if (globuleMoving) {
+				
 				if (outX) {y += motionY;} 
 				else if (outY) {x += motionX;}
-				else {x += motionX; y += motionY;}
+				else {x += motionX;y += motionY;}
 			} else {
 				if (motionX > 0) {motionX--;}
 				if (motionY > 0) {motionY--;}
+				
 			}
 		}
 		else 
 		{	
 			if (outX) {y += motionY;} 
 			else if (outY) {x += motionX;}
-			else {x += motionX; y += motionY;}
+			else {x += motionX;y += motionY;}
 		}
 	}
 	
