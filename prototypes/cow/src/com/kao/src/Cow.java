@@ -58,6 +58,16 @@ public class Cow implements ActionListener, KeyListener {
 				
 	}
 	
+	public boolean shouldRestart() {
+		int playersLeft = 0;
+		for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) {
+			if (players.get(playerNumber).livingStatus != 0) {
+				playersLeft++;
+			}
+		}
+		return playersLeft == 1;
+	}
+	
 	public void render(Graphics2D g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
@@ -99,14 +109,18 @@ public class Cow implements ActionListener, KeyListener {
 	
 	public void update() {
 		
+		if (shouldRestart()) {
+			start();
+		}
+				
 		for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) 
 		{
 			players.get(playerNumber).reload();
-			players.get(playerNumber).move();
 			for (int blobNumber = 0; blobNumber < players.get(playerNumber).blobs.size(); blobNumber++) 
 			{
 				players.get(playerNumber).blobs.get(blobNumber).move();
 			}
+			players.get(playerNumber).move();
 			players.get(playerNumber).getHit();
 		}
 	}

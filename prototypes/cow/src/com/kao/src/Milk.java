@@ -32,7 +32,7 @@ public class Milk {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.WHITE);
+		g.setColor(Color.RED);
 		g.fillOval(x, y, width, height);
 	}
 
