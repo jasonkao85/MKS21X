@@ -15,15 +15,16 @@ import javax.swing.Timer;
 
 public class Cow implements ActionListener, KeyListener {
 	
-	public int width = 700, height = 700;
+	public int width = 700, height = 700; 
+	public static int ticks;
 
 	public int gameStatus = 0; // 0 = menu, 1 = playing, 2 = paused
-	public int numberOfPlayers = 2;
+	public int numberOfFighterList = 2;
 	
 	public static Cow cow = new Cow();
 	public Renderer renderer;
-	public static ArrayList<Fighter> players;
-	public static int[] scores;
+	public static ArrayList<Fighter> FighterList;
+	public static int[] scores = new int[4];
 
 	public Cow() {
 		
@@ -48,24 +49,23 @@ public class Cow implements ActionListener, KeyListener {
 	public void start() {
 		gameStatus = 1;
 		
-		players = new ArrayList<Fighter>(numberOfPlayers);
-		scores = new int[numberOfPlayers];
+		FighterList = new ArrayList<Fighter>(numberOfFighterList);
 		
-		for (int i = 0; i < numberOfPlayers; i++) 
+		for (int i = 0; i < numberOfFighterList; i++) 
 		{
-			players.add(new Fighter(this, i + 1));
+			FighterList.add(new Fighter(this, i + 1));
 		}
 				
 	}
 	
 	public boolean shouldRestart() {
-		int playersLeft = 0;
-		for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) {
-			if (players.get(playerNumber).livingStatus != 0) {
-				playersLeft++;
+		int FighterListLeft = 0;
+		for (int fNum = 0; fNum < FighterList.size(); fNum++) {
+			if (FighterList.get(fNum).livingStatus != 0) {
+				FighterListLeft++;
 			}
 		}
-		return playersLeft == 1;
+		return FighterListLeft == 1;
 	}
 	
 	public void render(Graphics2D g) {
@@ -82,18 +82,18 @@ public class Cow implements ActionListener, KeyListener {
 			g.drawString("Press Enter for multiplayer.", width / 2 - 70, height / 2 + 20);
 			
 			g.setFont(new Font(null, 1, 12));
-			g.drawString("> "+String.valueOf(numberOfPlayers)+" players", width / 2 - 18,height / 2 + 48);
+			g.drawString("> "+String.valueOf(numberOfFighterList)+" FighterList", width / 2 - 18,height / 2 + 48);
 		} 
 		
 		if (gameStatus == 1 || gameStatus == 2) 
 		{
-			for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) {
-				players.get(playerNumber).render(g);
+			for (int fNum = 0; fNum < FighterList.size(); fNum++) {
+				FighterList.get(fNum).render(g);
 			}
-			for (int playerNumber = 0; playerNumber < numberOfPlayers; playerNumber++) {
+			for (int fNum = 0; fNum < numberOfFighterList; fNum++) {
 				g.setColor(Color.WHITE);
 				g.setFont(new Font(null, 1, 28));
-				g.drawString(String.valueOf(scores[playerNumber]), width / 2, 60 + 30 * playerNumber);
+				g.drawString(String.valueOf(scores[fNum]), width / 2, 60 + 30 * fNum);
 			}
 		}
 		
@@ -108,20 +108,21 @@ public class Cow implements ActionListener, KeyListener {
 	}
 	
 	public void update() {
+		ticks++;
 		
 		if (shouldRestart()) {
 			start();
 		}
 				
-		for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) 
+		for (int fNum = 0; fNum < FighterList.size(); fNum++) 
 		{
-			players.get(playerNumber).reload();
-			for (int blobNumber = 0; blobNumber < players.get(playerNumber).blobs.size(); blobNumber++) 
+			FighterList.get(fNum).reload();
+			for (int blobNumber = 0; blobNumber < FighterList.get(fNum).blobs.size(); blobNumber++) 
 			{
-				players.get(playerNumber).blobs.get(blobNumber).move();
+				FighterList.get(fNum).blobs.get(blobNumber).move();
 			}
-			players.get(playerNumber).move();
-			players.get(playerNumber).getHit();
+			FighterList.get(fNum).move();
+			FighterList.get(fNum).getHit();
 		}
 	}
 
@@ -152,10 +153,10 @@ public class Cow implements ActionListener, KeyListener {
 			if (id == KeyEvent.VK_ENTER) {
 				start();
 			} else if (id == KeyEvent.VK_RIGHT) {
-				if (numberOfPlayers == 4) {
-					numberOfPlayers = 2;
+				if (numberOfFighterList == 4) {
+					numberOfFighterList = 2;
 				} else {
-					numberOfPlayers++;
+					numberOfFighterList++;
 				}
 			}
 		} 
@@ -167,18 +168,18 @@ public class Cow implements ActionListener, KeyListener {
 				gameStatus = 0;
 			}
 			
-			for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) 
+			for (int fNum = 0; fNum < FighterList.size(); fNum++) 
 			{
-				if (id == players.get(playerNumber).keyEvents[0]) {
-					players.get(playerNumber).turning = true;
+				if (id == FighterList.get(fNum).keyEvents[0]) {
+					FighterList.get(fNum).turning = true;
 				} 
 				
-				if (id == players.get(playerNumber).keyEvents[1]) 
+				if (id == FighterList.get(fNum).keyEvents[1]) 
 				{
-					if (players.get(playerNumber).globuleActive) {
-						players.get(playerNumber).globuleMoving = true;
+					if (FighterList.get(fNum).globuleStatus[1] == 1) {
+						FighterList.get(fNum).globuleStatus[2] = 1;
 					} else {
-						players.get(playerNumber).shoot();
+						FighterList.get(fNum).shoot();
 					}
 				}
 			}
@@ -199,14 +200,13 @@ public class Cow implements ActionListener, KeyListener {
 		int id = e.getKeyCode();
 			
 		if (gameStatus == 1) {
-			for (int playerNumber = 0; playerNumber < players.size(); playerNumber++) 
+			for (int fNum = 0; fNum < FighterList.size(); fNum++) 
 			{
-				if (id == players.get(playerNumber).keyEvents[0]) {
-					players.get(playerNumber).turning = false;
+				if (id == FighterList.get(fNum).keyEvents[0]) {
+					FighterList.get(fNum).turning = false;
 				} 
-				if (id == players.get(playerNumber).keyEvents[1] && players.get(playerNumber).globuleActive) {
-					players.get(playerNumber).globuleMoving = false;
-					
+				if (id == FighterList.get(fNum).keyEvents[1] && FighterList.get(fNum).globuleStatus[1] == 1) {
+					FighterList.get(fNum).globuleStatus[2] = 0;
 				}
 			}
 		}

@@ -7,29 +7,33 @@ import java.util.ArrayList;
 
 public class Fighter {
 	
-	public int fighterNumber, x, y, width = 20, height = 20, livingStatus = 2, score, maxAmmo = 3, ammoLeft;
-	
-	public int globuleSize = 12, ammoIndicatorSize = 3, ammoIndicatorDistance = 20;
+	public int fNum, x, y, width = 20, height = 20, livingStatus = 2, score;
+	public int globuleSize = 12, ammoIndicatorSize = 3, ammoIndicatorDistance = 20, maxAmmo = 3, ammoLeft;
 	
 	public double angle, speedForward = .35, speedMilk = .8, speedRotate = 1;
-	public boolean turning = false, globuleActive = false, globuleMoving = false;
+	public boolean turning = false;
 	
-	public int motionX, motionY, globuleSpeedX, globuleSpeedY;
+	public int motionX, motionY;
 	public Double velX, velY;
 			
 	public static int distanceFromBorder = 20, windowCorrectionBottom = 22;
 	
 	public ArrayList<Milk> blobs = new ArrayList<Milk>();
 	
-	public int[] keyEvents = new int[2];
+	/* globuleStatus: {tick start, globuleActive?, globuleMoving?},
+	 * keyEvents: {turn, shoot},
+	 */
+	
+	
+	public int[] globuleStatus = new int[3], keyEvents = new int[2];
 				
-	public Fighter(Cow cow, int fighterNumber) {
+	public Fighter(Cow cow, int fNum) {
 		
-		this.fighterNumber = fighterNumber - 1;
+		this.fNum = fNum - 1;
 		
 		ammoLeft = maxAmmo;
 		
-		switch (fighterNumber) {
+		switch (fNum) {
 		case 1: // lower left corner
 			x = 0 + distanceFromBorder;
 			y = cow.height - height - distanceFromBorder - windowCorrectionBottom;
@@ -62,9 +66,26 @@ public class Fighter {
 
 	}
 	
-	public void move() {
+	public void move() {		
 		if (turning) {
 			angle += Math.PI * speedRotate / 40;
+		}
+		
+		if (globuleStatus[1] == 1) 
+		{
+			if (Cow.ticks - globuleStatus[0] == 300) {
+				livingStatus += 1;
+				globuleStatus[1] = 0;
+				speedForward = 0.35;
+				width = 20;
+				height = 20;
+			}
+			
+			if (globuleStatus[2] == 0) {
+				if (speedForward >= 0.01) {speedForward -= 0.01;}
+			} else if (globuleStatus[2] == 1) {
+				speedForward = 0.35;
+			}
 		}
 		
 		velX = new Double(Math.cos(angle) * 10);
@@ -75,23 +96,10 @@ public class Fighter {
 		boolean outX = x + motionX < 0 || x + width + motionX > Cow.cow.width;
 		boolean outY = y + motionX < 0 || y + height + motionY > Cow.cow.height - windowCorrectionBottom;
 		
-		if (globuleActive) 
-		{
-			if (globuleMoving) {
-				if (outX) {y += motionY;} 
-				else if (outY) {x += motionX;}
-				else {x += motionX; y += motionY;}
-			} else {
-				if (motionX > 0) {motionX--;}
-				if (motionY > 0) {motionY--;}
-			}
-		}
-		else 
-		{	
-			if (outX) {y += motionY;} 
-			else if (outY) {x += motionX;}
-			else {x += motionX; y += motionY;}
-		}
+		if (outX) {y += motionY;} 
+		else if (outY) {x += motionX;}
+		else {x += motionX; y += motionY;}
+		
 	}
 	
 	public void shoot() {
@@ -117,23 +125,25 @@ public class Fighter {
 		
 	public void getHit() {
 		
-		for (int currentEnemy = 0; currentEnemy < Cow.players.size(); currentEnemy++) 
+		for (int currentEnemy = 0; currentEnemy < Cow.FighterList.size(); currentEnemy++) 
 		{
-			if (currentEnemy != fighterNumber) 
+			if (currentEnemy != fNum) 
 			{
-				int[] collisionStatus = Cow.players.get(currentEnemy).collisionStatus(Cow.players.get(fighterNumber));
+				int[] collisionStatus = Cow.FighterList.get(currentEnemy).collisionStatus(Cow.FighterList.get(fNum));
 				if (collisionStatus[0] == 1) 
 				{
-					Cow.players.get(fighterNumber).livingStatus -= 1;
-					Cow.players.get(currentEnemy).blobs.remove(collisionStatus[1]);
-					Cow.players.get(currentEnemy).ammoLeft += 1;
+					Cow.FighterList.get(fNum).livingStatus -= 1;
+					Cow.FighterList.get(currentEnemy).blobs.remove(collisionStatus[1]);
+					Cow.FighterList.get(currentEnemy).ammoLeft += 1;
 					
 					if (livingStatus == 1) {
 						x += width / 4;
 						y += height / 4;
 						width = globuleSize;
 						height = globuleSize;
-						globuleActive = true;
+						globuleStatus[0] = Cow.ticks; // ticks when globule became active
+						globuleStatus[1] = 1; // globuleActive? 0=no, 1=yes
+						globuleStatus[2] = 0; // globuleMoving? 0=no, 1=yes
 					}
 					if (livingStatus == 0) {
 						Cow.scores[currentEnemy] += 1;
@@ -165,20 +175,23 @@ public class Fighter {
 			g.setColor(Color.WHITE);
 			g.drawRect(x, y, width, height);
 			
-			for (int blobNumber = 0; blobNumber < ammoLeft; blobNumber++) {
-				switch (blobNumber) {
-				case 0:
-					g.setColor(Color.WHITE);
-					g.fillRect(x + width/2, y - ammoIndicatorDistance, 2, 2);
-					break;
-				case 1:
-					g.setColor(Color.WHITE);
-					g.fillRect(x - ammoIndicatorDistance/2, y + height/2 + ammoIndicatorDistance/2, 2, 2);
-					break;
-				case 2:
-					g.setColor(Color.WHITE);
-					g.fillRect(x + width + ammoIndicatorDistance/2, y + height/2 + ammoIndicatorDistance/2, 2, 2);
-					break;
+			if (globuleStatus[1] == 0) 
+			{
+				for (int blobNumber = 0; blobNumber < ammoLeft; blobNumber++) {
+					switch (blobNumber) {
+					case 0:
+						g.setColor(Color.WHITE);
+						g.fillRect(x + width/2, y - ammoIndicatorDistance, 2, 2);
+						break;
+					case 1:
+						g.setColor(Color.WHITE);
+						g.fillRect(x - ammoIndicatorDistance/2, y + height/2 + ammoIndicatorDistance/2, 2, 2);
+						break;
+					case 2:
+						g.setColor(Color.WHITE);
+						g.fillRect(x + width + ammoIndicatorDistance/2, y + height/2 + ammoIndicatorDistance/2, 2, 2);
+						break;
+					}
 				}
 			}
 			
