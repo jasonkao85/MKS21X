@@ -232,9 +232,8 @@ public class Fighter {
 			Points[i+4] = (int) (distanceToCenter * Math.sin(angle));
 		}
 		
-		int[] hi = {0,100,0,100,
-				    0,50,0,50};
-		return hi;
+		int[] hi = {0,100,0,100,0,50,0,50};
+		return Points;
 	}
 	
 	public void render(Graphics g) {

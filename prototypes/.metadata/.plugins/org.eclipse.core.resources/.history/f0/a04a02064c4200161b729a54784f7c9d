@@ -233,7 +233,7 @@ public class Fighter {
 		}
 		
 		int[] hi = {0,100,0,100,
-				    0,50,0,50};
+				0,50,0,50};
 		return hi;
 	}
 	

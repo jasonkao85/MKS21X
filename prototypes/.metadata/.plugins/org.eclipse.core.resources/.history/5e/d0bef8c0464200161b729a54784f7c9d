@@ -2,9 +2,7 @@ package com.kao.src;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 
 public class Fighter {
@@ -171,34 +169,36 @@ public class Fighter {
 					int[] Fsides = {rnFighter.x, rnFighter.x+rnFighter.width, rnFighter.y, rnFighter.y+rnFighter.height};
 					int[] Esides = {rnEnemy.x, rnEnemy.x+rnEnemy.width, rnEnemy.y, rnEnemy.y+rnEnemy.height};
 					
+					
 					if (!(Fsides[3] < Esides[2] || Fsides[2] > Esides[3] || Fsides[1] < Esides[0] || Fsides[0] > Esides[1]) && rnFighter.livingStatus == 1)
 					{
 						Cow.FighterList.get(fNum).livingStatus -= 1;
 						Cow.scores[currentEnemy] += 1;
 					} 	
 				}
-				
-				int[] collisionStatus = Cow.FighterList.get(currentEnemy).collisionStatus(Cow.FighterList.get(fNum));
-				if (collisionStatus[0] == 1 && Cow.FighterList.get(fNum).livingStatus > 0) 
+				else
 				{
-					Cow.FighterList.get(fNum).livingStatus -= 1;
-					Cow.FighterList.get(currentEnemy).blobs.remove(collisionStatus[1]);
-					Cow.FighterList.get(currentEnemy).ammoLeft += 1;
-					
-					if (livingStatus == 1) {
-						x += width / 4;
-						y += height / 4;
-						width = globuleSize;
-						height = globuleSize;
-						globuleStatus[0] = Cow.ticks; // ticks when globule became active
-						globuleStatus[1] = 1; // globuleActive? 0=no, 1=yes
-						globuleStatus[2] = 0; // globuleMoving? 0=no, 1=yes
-					}
-					if (livingStatus == 0) {
-						Cow.scores[currentEnemy] += 1;
-					}
-				} 
-				
+					int[] collisionStatus = Cow.FighterList.get(currentEnemy).collisionStatus(Cow.FighterList.get(fNum));
+					if (collisionStatus[0] == 1) 
+					{
+						Cow.FighterList.get(fNum).livingStatus -= 1;
+						Cow.FighterList.get(currentEnemy).blobs.remove(collisionStatus[1]);
+						Cow.FighterList.get(currentEnemy).ammoLeft += 1;
+						
+						if (livingStatus == 1) {
+							x += width / 4;
+							y += height / 4;
+							width = globuleSize;
+							height = globuleSize;
+							globuleStatus[0] = Cow.ticks; // ticks when globule became active
+							globuleStatus[1] = 1; // globuleActive? 0=no, 1=yes
+							globuleStatus[2] = 0; // globuleMoving? 0=no, 1=yes
+						}
+						if (livingStatus == 0) {
+							Cow.scores[currentEnemy] += 1;
+						}
+					} 
+				}
 			}
 		}
 	}
@@ -218,44 +218,9 @@ public class Fighter {
 		}
 	}
 	
-	public int[] rotate() {
-		int x1 = 10, y1 = 10, width1 = 20, height1 = 10;
-		int centerX = x1 + width1/2;
-		int centerY = y1 + height1/2;
-		
-		int[] Points = new int[8]; // from top left clockwise
-		
-		int distanceToCenter = (int) Math.pow(Math.pow(centerX - x1, 2) + Math.pow(centerY - y1, 2), 1/2);
-		
-		for (int i = 0; i < Points.length/2; i++) {
-			Points[i] = (int) (distanceToCenter * Math.cos(angle));
-			Points[i+4] = (int) (distanceToCenter * Math.sin(angle));
-		}
-		
-		int[] hi = {0,100,0,100,
-				    0,50,0,50};
-		return hi;
-	}
-	
 	public void render(Graphics g) {
 		if (livingStatus > 0) 
 		{
-			Graphics2D g2 = (Graphics2D)g;
-			g2.setColor(Color.WHITE);
-			int[] Points = rotate();
-			
-			GeneralPath polygon = 
-			        new GeneralPath(GeneralPath.WIND_EVEN_ODD,
-			                        Points.length/2);
-			polygon.moveTo(Points[0], Points[4]);
-
-			for (int index = 1; index < Points.length/2; index++) {
-			        polygon.lineTo(Points[index], Points[index+4]);
-			};
-
-			polygon.closePath();
-			g2.draw(polygon);
-			
 			g.setColor(color);
 			g.drawRect(x, y, width, height);
 			

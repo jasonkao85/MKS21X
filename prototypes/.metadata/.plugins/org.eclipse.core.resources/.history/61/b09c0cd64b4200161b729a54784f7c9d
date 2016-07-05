@@ -232,9 +232,7 @@ public class Fighter {
 			Points[i+4] = (int) (distanceToCenter * Math.sin(angle));
 		}
 		
-		int[] hi = {0,100,0,100,
-				    0,50,0,50};
-		return hi;
+		return Points;
 	}
 	
 	public void render(Graphics g) {
@@ -242,20 +240,19 @@ public class Fighter {
 		{
 			Graphics2D g2 = (Graphics2D)g;
 			g2.setColor(Color.WHITE);
-			int[] Points = rotate();
-			
+			int x1Points[] = {0, 100, 0, 100};
+			int y1Points[] = {0, 50, 50, 0};
 			GeneralPath polygon = 
 			        new GeneralPath(GeneralPath.WIND_EVEN_ODD,
-			                        Points.length/2);
-			polygon.moveTo(Points[0], Points[4]);
+			                        x1Points.length);
+			polygon.moveTo(x1Points[0], y1Points[0]);
 
-			for (int index = 1; index < Points.length/2; index++) {
-			        polygon.lineTo(Points[index], Points[index+4]);
+			for (int index = 1; index < x1Points.length; index++) {
+			        polygon.lineTo(x1Points[index], y1Points[index]);
 			};
 
 			polygon.closePath();
 			g2.draw(polygon);
-			
 			g.setColor(color);
 			g.drawRect(x, y, width, height);
 			
