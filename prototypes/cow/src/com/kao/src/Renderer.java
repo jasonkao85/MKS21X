@@ -12,7 +12,6 @@ public class Renderer extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g); 
-		
 		Cow.cow.render((Graphics2D) g);
 	}
 

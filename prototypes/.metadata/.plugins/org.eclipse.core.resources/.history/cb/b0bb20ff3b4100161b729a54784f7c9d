@@ -1,0 +1,23 @@
+package com.kao.src;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+
+public class Renderer extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void paintComponent(Graphics g){
+		super.paintComponent(g); 
+		 Graphics2D g2d = (Graphics2D)g;
+        AffineTransform old = g2d.getTransform();
+        g2d.rotate(Math.toRadians(Cow.FighterList.get(1).angle));
+        //draw shape/image (will be rotated)
+        g2d.setTransform(old);
+		Cow.cow.render((Graphics2D) g);
+	}
+
+}
