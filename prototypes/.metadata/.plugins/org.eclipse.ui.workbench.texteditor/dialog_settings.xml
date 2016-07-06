@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="numberOfFighters" key="selection"/>
+		<item value="rnEnemy" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="rnFighter"/>
+			<item value="Cow.FighterList.get(currentEnemy)"/>
+			<item value="Cow.FighterList.get(fNum)"/>
 			<item value="numberOfFighterList"/>
 			<item value="print"/>
 			<item value="fighterNumber"/>
 			<item value="playerNumber"/>
 			<item value="println"/>
-			<item value="players"/>
-			<item value="motionX"/>
-			<item value=" / 2"/>
 		</list>
 		<list key="replacehistory">
+			<item value="rnEnemy"/>
+			<item value="rnFighter"/>
 			<item value="numberOfFighters"/>
 			<item value="fNum`"/>
 			<item value="fNum"/>
 			<item value="FighterList"/>
 			<item value="Fighter"/>
 			<item value="motionY"/>
-			<item value="/2"/>
-			<item value="ammoIndicatorDistance"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -218,39 +218,33 @@ public class Fighter {
 		}
 	}
 	
-	public int[] rotate() {
-		int x1 = 10, y1 = 10, width1 = 20, height1 = 10;
-		int centerX = x1 + width1/2;
-		int centerY = y1 + height1/2;
+	public int[] rotate(int points) { // param1 for testing	
+
+		int[] Points = new int[points]; // from top left clockwise
 		
-		int[] Points = new int[8]; // from top left clockwise
-		
-		int distanceToCenter = (int) Math.pow(Math.pow(centerX - x1, 2) + Math.pow(centerY - y1, 2), 1/2);
-		
+		double distanceToCenter = 4;
 		for (int i = 0; i < Points.length/2; i++) {
-			Points[i] = (int) (distanceToCenter * Math.cos(angle));
-			Points[i+4] = (int) (distanceToCenter * Math.sin(angle));
+			Points[i] = (int) (distanceToCenter * Math.cos((i+2)*Math.PI/8+angle) * 10) + x;
+			Points[i+Points.length/2] = (int) (distanceToCenter * Math.sin((i+2)*Math.PI/8+angle) * 10) + y;
 		}
-		
-		int[] hi = {0,100,0,100,
-				    0,50,0,50};
-		return hi;
+
+		return Points;
 	}
 	
 	public void render(Graphics g) {
 		if (livingStatus > 0) 
 		{
 			Graphics2D g2 = (Graphics2D)g;
-			g2.setColor(Color.WHITE);
-			int[] Points = rotate();
+			g2.setColor(color);
+			int[] Points = rotate(2);//{x,x+width,y,y+height};
 			
 			GeneralPath polygon = 
 			        new GeneralPath(GeneralPath.WIND_EVEN_ODD,
 			                        Points.length/2);
-			polygon.moveTo(Points[0], Points[4]);
+			polygon.moveTo(Points[0], Points[Points.length/2]);
 
 			for (int index = 1; index < Points.length/2; index++) {
-			        polygon.lineTo(Points[index], Points[index+4]);
+			        polygon.lineTo(Points[index], Points[index+Points.length/2]);
 			};
 
 			polygon.closePath();
