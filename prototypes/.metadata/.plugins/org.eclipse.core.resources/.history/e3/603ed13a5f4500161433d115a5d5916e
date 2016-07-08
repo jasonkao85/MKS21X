@@ -182,9 +182,7 @@ public class Cow implements ActionListener, KeyListener {
 				{
 					if (FighterList.get(fNum).globuleStatus[1] == 1) {
 						FighterList.get(fNum).globuleStatus[2] = 1;
-					} else {
-						FighterList.get(fNum).shoot();
-					}
+					} 
 				}
 			}
 		}

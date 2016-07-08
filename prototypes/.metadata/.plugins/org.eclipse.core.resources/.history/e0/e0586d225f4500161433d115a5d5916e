@@ -30,7 +30,7 @@ public class Fighter {
 	 * dashStatus: {previous end, next start, dashTimer}
 	 * laserStatus: {tick start, laserActive?}
 	 */
-	public int[] globuleStatus = new int[3], keyEvents = new int[2], dashStatus = new int[3];
+	public int[] globuleStatus = new int[3], keyEvents = new int[2], dashStatus = new int[3], laserStatus = new int[4];
 				
 	public Fighter(Cow cow, int fNum) {
 		
@@ -285,6 +285,18 @@ public class Fighter {
 			
 			for (int blobNumber = 0; blobNumber < blobs.size(); blobNumber++) {
 				blobs.get(blobNumber).render(g);
+			}
+		}
+		if (livingStatus == 2) 
+		{
+			if (laserStatus[1] == 1) {
+				if (Cow.ticks - laserStatus[0] <= 0) {
+					laserStatus[2] = x;
+					laserStatus[3] = y;
+				}
+				
+				g.setColor(color);
+				g.drawRect(laserStatus[2], laserStatus[3], 10, 10);
 			}
 		}
 
