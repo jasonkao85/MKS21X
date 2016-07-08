@@ -16,7 +16,7 @@ import javax.swing.Timer;
 public class Cow implements ActionListener, KeyListener {
 	
 	public int width = 700, height = 700; 
-	public static int ticks, ticks_restartGame;
+	public static int ticks;
 
 	public int gameStatus = 0; // 0 = menu, 1 = playing, 2 = paused
 	public int numberOfFighters = 2;
@@ -109,11 +109,7 @@ public class Cow implements ActionListener, KeyListener {
 	public void update() {
 		
 		if (shouldRestart()) {
-			if (ticks_restartGame == 0) {ticks_restartGame = ticks;}
-			else if (ticks - ticks_restartGame == 100) {
-				start();
-				ticks_restartGame = 0;
-			}
+			start();
 		}
 		
 		ticks++;
@@ -187,7 +183,8 @@ public class Cow implements ActionListener, KeyListener {
 					if (FighterList.get(fNum).globuleStatus[1] == 1) {
 						FighterList.get(fNum).globuleStatus[2] = 1;
 					} else {
-						FighterList.get(fNum).shoot();
+						FighterList.get(fNum).laserStatus[0] = ticks;
+						FighterList.get(fNum).laserStatus[1] = 1;
 					}
 				}
 			}
@@ -206,9 +203,12 @@ public class Cow implements ActionListener, KeyListener {
 					FighterList.get(fNum).turning = false;
 					FighterList.get(fNum).dashStatus[0] = ticks;
 				} 
-				if (id == FighterList.get(fNum).keyEvents[1] && FighterList.get(fNum).globuleStatus[1] == 1) {
-					FighterList.get(fNum).globuleStatus[2] = 0;
+				if (id == FighterList.get(fNum).keyEvents[1]) {
+					if (FighterList.get(fNum).globuleStatus[1] == 1) {
+						FighterList.get(fNum).globuleStatus[2] = 0;
+					}
 				}
+
 			}
 		}
 	}
