@@ -77,7 +77,7 @@ public class Fighter {
 	
 	public void move() {		
 		if (turning) {
-			angle += Math.PI * speedRotate / 40;
+			angle += Math.PI * speedRotate / 4;
 		}
 		
 		if (globuleStatus[1] == 1) 

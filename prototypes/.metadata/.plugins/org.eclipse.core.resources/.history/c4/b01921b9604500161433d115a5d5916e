@@ -15,7 +15,7 @@ public class Fighter {
 	
 	public Color color;
 	
-	public double angle, speedForward = .35, speedMilk = .8, speedRotate = 1;
+	public double angle, speedForward = .35, speedMilk = .8, speedRotate = .1;
 	public boolean turning = false;
 	
 	public int motionX, motionY;
@@ -77,7 +77,7 @@ public class Fighter {
 	
 	public void move() {		
 		if (turning) {
-			angle += Math.PI * speedRotate / 40;
+			angle += Math.PI * speedRotate / 4;
 		}
 		
 		if (globuleStatus[1] == 1) 
@@ -242,8 +242,8 @@ public class Fighter {
 	public void render(Graphics g) { 
 		if (livingStatus > 0) 
 		{
-			int numOfPoints = 500;
-			int sizeOfPoints = 5;
+			int numOfPoints = 100;
+			int sizeOfPoints = 10;
 			Graphics2D g2 = (Graphics2D)g;
 			g2.setColor(color);
 			int[] Points = rotate(numOfPoints, sizeOfPoints);//{x,x+width,y,y+height};
