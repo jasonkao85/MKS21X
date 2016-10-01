@@ -1,9 +1,0 @@
-package com.kao.src;
-
-public class BlobStorage {
-
-	public BlobStorage() {
-		
-	}
-
-}

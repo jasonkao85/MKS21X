@@ -1,5 +1,0 @@
-package com.kao.src.input;
-
-public class KeyInput extends KeyAdapter {
-
-}

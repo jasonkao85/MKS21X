@@ -1,9 +1,0 @@
-package com.kao.src;
-
-public class Fighter {
-
-	public Fighter() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
