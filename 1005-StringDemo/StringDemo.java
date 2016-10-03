@@ -1,23 +1,3 @@
-/*
-1 charAt(int)
-2 length()
-3 equals(String)
-4 compareTo(String)
-5 indexOf(String)
-6 substring(int,int)
-7 substring(int)
-
-Write a StringDemo class, that just contains a main.
-In that main, write a set of examples of each of the 7 methods that work. 
-Mess around with the working examples, to generate compile time errors or runtime errors (exceptions).
-
-Copy/Paste 5 different errors, Explain what they mean, how you can find it in your code, and how you can recognize what to do in the future. Notice things like line numbers in the error messages!
-
-Submit a digital copy by Wed 8am on the HW server.
-
-Include the entire error, but if you make one change that causes other errors, just paste the 1st error.
-*/
-
 public class StringDemo{
 
     public static void main(String[]args){
@@ -32,7 +12,10 @@ public class StringDemo{
 	System.out.println("substring of s: " + s.substring(s.indexOf("Kao"),s.length()));
         System.out.println("substring of s after space: " + s.substring(s.indexOf(' ')));
 
-	
+    }
+
+}
+
 	/*
 
 Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: -91
@@ -68,17 +51,14 @@ Dereferencing is the process of getting a value from a reference. But char is a 
 
 -------------------------------------
 
-
-
 StringDemo.java:61: error: method compareTo in class String cannot be applied to given types;
 	System.out.println(s.compareTo("aas","sdf"));
 	                    ^
   required: String
   found: String,String
-  reason: actual and formal argument lists differ in length          
+  reason: actual and formal argument lists differ in length 
+
+This error occurs when a method receives the wrong number of parameters. This error can be prevented by knowledge of the method and what type of parameters it takes.
+
 
 	*/
-
-    }
-
-}
