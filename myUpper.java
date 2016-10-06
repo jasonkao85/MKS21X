@@ -8,14 +8,16 @@ public class myUpper{
 	
 	public static String myUpper(String str) {
 	
-		String s = str;
+		String s = "";
 		int i = 0;
 		
 		while (i < str.length()) {
 			if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
-				str = str.substring(0,i) + ((char) (str.charAt(i) - ('a'-'A'))) + str.substring(i+1, str.length());
+				s += (char) (str.charAt(i) - 'a' + 'A');
+			} else {
+				s += s.charAt(x);
 			}
-			i += 1;
+			i++;
 		}
 		
 		return str;
