@@ -12,8 +12,8 @@ public class myUpper{
 		int i = 0;
 		
 		while (i < str.length()) {
-			if (str.charAt(i) >= 97){
-				str = str.substring(0,i) + ((char) (str.charAt(i) - 32)) + str.substring(i+1, str.length());
+			if (str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){
+				str = str.substring(0,i) + ((char) (str.charAt(i) - ('a'-'A'))) + str.substring(i+1, str.length());
 			}
 			i += 1;
 		}
