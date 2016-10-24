@@ -38,3 +38,11 @@ For v. While:
 - for: easy to read limits, increments, and behavior (it's in the first line)
 - for: increment **always called last**
 - while: have to look through code for the increments, can be anywhere in body
+
+###10-18-16: running archives of classes (jar)
+Java allows the inclusion of other directories and archives of classes (jar files) with the -cp flag.
+```
+javac -cp  .<semi colon separated files/paths>  filename.java
+example: javac -cp .:core.jar spaceInvaders.java (period is a comma on Windows)
+```
+
