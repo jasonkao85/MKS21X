@@ -33,7 +33,7 @@ for (init; boolean; increment) {
     // ...
 }
 ```
-If the init is declared inside the for loop, it only exists within the for loop. The opposite is true.
+If the init is declared inside the for loop, it only exists within the for loop. The opposite is true.  
 For v. While:
 - for: easy to read limits, increments, and behavior (it's in the first line)
 - for: increment **always called last**
@@ -45,4 +45,20 @@ Java allows the inclusion of other directories and archives of classes (jar file
 javac -cp  .<semi colon separated files/paths>  filename.java
 example: javac -cp .:core.jar spaceInvaders.java (period is a comma on Windows)
 ```
+
+###09-15-16
+Compiled Language
+- Human readable source code is translated (compiled) into machine language run directly by computer. (binary)
+- programs don't run on computer, they run on java virtual machine (JVM) which reads .class files
+- JVM is an interpreter (translates from byte code to machine instructions)
+- .class files are readable by the JVM, independent of platform
+
+The primitive data types: (you need the ones underlined)
+- int (32 bit, values from -2^31 to +2^31-1)
+- double (64 bit)
+- boolean
+- char (16 bits)
+
+
+
 
