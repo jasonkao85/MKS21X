@@ -1,5 +1,17 @@
 # apcs
-#
+
+###10-25-16: arrays
+
+Arrays are objects, not instances.  
+*Instance variables* are primitives and are part of objects. (int bulletsLeft) **default value:** 0  
+*Object variables* (static int flightNumber) **no default value**  
+```
+int[]varname = new int[10]; // instantiates array to specified size
+// varname refers to 10 blocks of memory in the address
+varname[n] = m;
+varname.length // returns length
+```
+
 ###10-24-16: variable types
 
 Hierarchy: Agent-->Ship-->Enemy,EnemyBomber
@@ -46,7 +58,7 @@ Subclass sub2 = new Subclass(); // works
 ```
 You cannot store a class into a sub version of itself.
 
-RUNTIME ERROR: errors of values (type casting sibling classes)
+RUNTIME ERROR: errors of values (type casting sibling classes)  
 COMPILE TIME ERROR: errors of type (Subclass sub1 = new Superclass();)
 
 ###10-21-16: loops
