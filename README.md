@@ -1,5 +1,5 @@
 # apcs
-
+#
 ###10-24-16: variable types
 
 Hierarchy: Agent-->Ship-->Enemy,EnemyBomber
@@ -20,10 +20,34 @@ z = orange // not allowed, b/c Agent is higher on the hierarchy
 An object is the reference (type), but its instance can be a subclass
 ```
 Agent y = tipton; // agent reference, but ship instance
-(Ship) y; // legal, explained below
+(Ship) y; // legal
 ```
-Typecasting: we can type cast y ONLY b/c it has info from Ship tipton.
+Some notes on typecasting upwards: 
+```
+class A has display() which prints "Hi".
+class B extends A has display() which prints "Bye".
 
+class demo {
+    public static void main(String[]args) {
+        B obj = new B();
+        obj.display(); // Bye
+        ( (A) obj ).display(); // Hi
+    }
+}
+```
+Although ((A) obj) is still an instance and still has the properties of class B, Java only reads the reference. Here, the reference is A. So even though A obj has the information of B, java will call the A method.
+
+If you try to type cast upwards and access methods/variables from your original class, it will not work--they are hidden. This is because Java thinks you are a SuperClass, not a SubClass.
+```
+Superclass s1 = new Superclass(); // works
+Superclass s2 = new Subclass(); // works b/c superclass is less specific than subclass
+Subclass sub1 = new Superclass(); // COMPILE TIME ERROR b/c subclass is more specific than superclass
+Subclass sub2 = new Subclass(); // works
+```
+You cannot store a class into a sub version of itself.
+
+RUNTIME ERROR: errors of values (type casting sibling classes)
+COMPILE TIME ERROR: errors of type (Subclass sub1 = new Superclass();)
 
 ###10-21-16: loops
 
