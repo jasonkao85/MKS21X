@@ -8,7 +8,7 @@ Arrays are objects, not instances.
 ```
 int[]varname = new int[10]; // instantiates array to specified size
 // varname refers to 10 blocks of memory in the address
-varname[n] = m;
+varname[n] = m; // "Varname sub n"
 varname.length // returns length
 ```
 
