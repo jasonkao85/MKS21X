@@ -52,8 +52,14 @@ public class SuperArray{
     public String toString(){
         String out = "[ ";
 	for (int i = 0; i < size; i++) {
-	    out += String.valueOf(data[i]) + ", ";
+	    if (i == 0) {
+		out += String.valueOf(data[i]);
+	    } else {
+		out += ", " + String.valueOf(data[i]);
+	    }
 	}
+	out += "]";
+	return out;
     }
 
     //4
@@ -64,6 +70,15 @@ public class SuperArray{
      *unused slots should be printed as _ (underscores) */
 
     public String toStringDebug(){
-	return "";
+	String out = "[ ";
+	for (int i = 0; i < data.length; i++) {
+	    if (i == 0) {
+		out += String.valueOf(data[i]);
+	    } else {
+		out += ", " + String.valueOf(data[i]);
+	    }
+	}
+	out += "]";
+	return out;
     }
 }
