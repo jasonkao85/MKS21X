@@ -1,5 +1,11 @@
 # apcs
 
+###10-28-16: SuperArray
+
+int[] to Array(), problems with ```return data;``` :
+- trash data @ the end
+- this is returning the **exact address**. NEVER EXPOSE the internal structure of your object, use methods.  
+
 ###10-25-16: arrays
 
 Arrays are objects, not instances.  
