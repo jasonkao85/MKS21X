@@ -1,148 +1,105 @@
 public class SuperArray{
+
     private int[] data;
     private int size;
-  
-    //constructor make an empty superArray should make size 0, but the data capacity 10.
-    public SuperArray() {
+
+    public SuperArray(){
 	data = new int[10];
 	size = 0;
     }
-
-    public int getSize(){
-	return size;
-    }
-
-    // 1.  Appends the specified element to the end of this list. It returns true (add this part)
-
-     public boolean add(int n){
-	 if (size == data.length) {
-	     grow();
-	 } else {
-	     data[size] = n;
-	     size++;
-	 }
-	 return true;
-     }
-
-     // helper function to 1
-
-    private void grow(){
-	int[] temp = new int[data.length+1];
-	for (int i = 0; i < data.length; i++) {
+    
+    public void grow(){
+        int[] temp = new int[data.length*2];
+	for (int i = 0; i < size; i++) {
 	    temp[i] = data[i];
 	}
 	data = temp;
+    }
+
+    public boolean add(int element){
+	if (size == data.length){
+	    grow();
+	}
+
+	data[size] = element;
 	size++;
+	return true;
     }
 
-    // 2. Returns the element at the specified position in this list.
+    public int get(int index){
 
-    public int get(int n){
-        return data[n];
+	return data[index];
     }
-    
-    
-    // 3. Returns the number of elements in this list.
 
     public int size(){
 	return size;
     }
 
-    /* 4.
-     * format the super array like this :   [ 1, 3, 6, 8, 23, 99, -4, 5] 
-     * commas between... square bracket start/end and no comma at end.
-     */
-
     public String toString(){
-        String out = "[ ";
-	for (int i = 0; i < size-1; i++) {
-	    if (i == 0) {
-		out += String.valueOf(data[i]);
-	    } else {
-		out += ", " + String.valueOf(data[i]);
-	    }
-	}
-	out += "]";
-	return out;
-    }
+	String out = "[ ";
 
-    /* 5.
-     * format the super array like this :   [ 1, 8, 23, 99, -4, 5, _, _, _, _]   
-     * (capacity is 10, but only 6 are used)
-     * commas between... square bracket start/end and no comma at end.
-     * unused slots should be printed as _ (underscores) */
+	for (int i = 0; i < size; i++){
+	    out += String.valueOf(data[i]) + ", ";
+	}
+
+	return out.substring(0,out.length()-2).concat("]");
+    }
 
     public String toStringDebug(){
-	String out = "[ ";
-	for (int i = 0; i < size; i++) {
-	    if (i == 0) {
-		out += String.valueOf(data[i]);
-	    } else {
-		out += ", " + String.valueOf(data[i]);
-	    }
-	}
-	for (int i = size; i < data.length; i++) {
-	    if (i == 0) {
-		out += " _";
-	    } else {
-		out += ", _";
-	    }
-	}
-	out += "]";
-	return out;
-    }
+        String out = "[ ";
 
-    // 6. Remove all elements from the array.
+	for (int i = 0; i < data.length; i++){
+	    if (i < size){
+		out += String.valueOf(data[i]) + ", ";
+	    } else {
+		out += "_, ";
+	    }
+	}
+
+	return out.substring(0,out.length()-2).concat("]");
+    }
 
     public void clear(){
 	size = 0;
     }
 
-    // 7. Returns true if this list contains no elements.
-
     public boolean isEmpty(){
 	return size == 0;
     }
 
-    // 8. Replaces the element at the specified position in this list with the specified element. Returns the value of the element replaced.
-
     public int set(int index, int element){
 	int out = data[index];
 
-	for (int i = 0; i < size; i++){
-	    if (i == index){
-	        data[i] = element;
-	    }
+	data[index] = element;
+
+	if (index >= size){
+	    size = index + 1;
 	}
 
 	return out;
     }
 
-    // 9. Inserts the specified element at the specified position in this list. Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
-
     public void add(int index, int element){
+	
 	for (int i = size-1; i > index; i--){
-
 	    data[i] = data[i-1];
-	    
-
 	}
+
 	data[index] = element;
-	size++;
+
+        size++;
     }
-	    
-    // 10. Removes the element at the specified position in this list. Shifts any subsequent elements to the left (subtracts one from their indices). The value returned is the value of the element removed.
 
     public int remove(int index){
 	int out = data[index];
-	for (int i = index; i < size-2; i++){
+
+	for (int i = index; i < size-1; i++){
 	    data[i] = data[i+1];
 	}
+
 	size--;
 	return out;
     }
-
-    // 11. Returns an array containing all of the elements in this list in proper sequence (from first to last element)
 
     public int[] toArray(){
 	int[] out = new int[size];
@@ -154,26 +111,23 @@ public class SuperArray{
 	return out;
     }
 
-    // 12. Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
-
     public int indexOf(int i){
-	for (int x = 0; x < size-1; x++) {
-	    if (i == data[x]) {
-		return x;
+	for (int j = 0; j < size; j++){
+	    if (data[j] == i){
+		return j;
 	    }
 	}
 	return -1;
     }
 
-    // 13. Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
-
     public int lastIndexOf(int i){
-	for (int x = size - 2; x >= 0; x--){
-	    if (i == data[x]){
-		return x;
+	for (int j = size-1; j >= 0; j--){
+	    if (data[j]==i){
+		return j;
 	    }
 	}
 	return -1;
     }
 
 }
+	
