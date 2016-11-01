@@ -8,10 +8,21 @@ public class Driver{
 	    hamilton.add(i);
 	    hamilton.set(i,85);
 	}
+	    
+	System.out.println(hamilton);
+	    
+	SuperArray jefferson = new SuperArray();
 
-        for (int i = 0; i < hamilton.size(); i++){
-	    hamilton.add(i,i);
+        for (int i = 9; i >= 0; i--){
+	    jefferson.add(i,i);
 	}
+	    
+	System.out.println(jefferson);
+	    
+	SuperArray burr = new SuperArray(100000);
+	    
+	for (int i = 0; i < 9999; i++){
+	    burr.
 	
 
 	System.out.println(hamilton.size());
