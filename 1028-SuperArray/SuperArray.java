@@ -7,6 +7,14 @@ public class SuperArray{
 	data = new int[10];
 	size = 0;
     }
+
+    public SuperArray(int initialCapacity){
+	if (initialCapacity < 0){
+	    throw new IllegalArgumentException();
+	}
+	data = new int[initialCapacity];
+	size = 0;
+    }
     
     public void grow(){
         int[] temp = new int[data.length*2];
@@ -27,7 +35,9 @@ public class SuperArray{
     }
 
     public int get(int index){
-
+	if (index < 0 || index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
 	return data[index];
     }
 
@@ -68,6 +78,9 @@ public class SuperArray{
     }
 
     public int set(int index, int element){
+	if (index < 0 || index >= size){
+	    throw new IndexOutOfBoundsException;
+	}
 	int out = data[index];
 
 	data[index] = element;
@@ -80,7 +93,9 @@ public class SuperArray{
     }
 
     public void add(int index, int element){
-	
+	if (index < 0 || index > size){
+	    throw new IndexOutOfBoundsException;
+	}
 	for (int i = size-1; i > index; i--){
 	    data[i] = data[i-1];
 	}
@@ -91,6 +106,9 @@ public class SuperArray{
     }
 
     public int remove(int index){
+	if (index < 0 || index > size){
+	    throw new IndexOutOfBoundsException;
+	}
 	int out = data[index];
 
 	for (int i = index; i < size-1; i++){
@@ -130,4 +148,3 @@ public class SuperArray{
     }
 
 }
-	
