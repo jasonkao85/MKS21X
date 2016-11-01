@@ -18,18 +18,18 @@ public class SuperArray{
     
     public void grow(){
         int[] temp = new int[data.length*2];
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size(); i++) {
 	    temp[i] = data[i];
 	}
 	data = temp;
     }
 
     public boolean add(int element){
-	if (size == data.length){
+	if (size() == data.length){
 	    grow();
 	}
 
-	data[size] = element;
+	data[size()] = element;
 	size++;
 	return true;
     }
@@ -48,7 +48,7 @@ public class SuperArray{
     public String toString(){
 	String out = "[ ";
 
-	for (int i = 0; i < size; i++){
+	for (int i = 0; i < size(); i++){
 	    out += String.valueOf(data[i]) + ", ";
 	}
 
@@ -59,7 +59,7 @@ public class SuperArray{
         String out = "[ ";
 
 	for (int i = 0; i < data.length; i++){
-	    if (i < size){
+	    if (i < size()){
 		out += String.valueOf(data[i]) + ", ";
 	    } else {
 		out += "_, ";
@@ -74,18 +74,18 @@ public class SuperArray{
     }
 
     public boolean isEmpty(){
-	return size == 0;
+	return size() == 0;
     }
 
     public int set(int index, int element){
-	if (index < 0 || index >= size){
-	    throw new IndexOutOfBoundsException;
+	if (index < 0 || index >= size()){
+	    throw new IndexOutOfBoundsException();
 	}
 	int out = data[index];
 
 	data[index] = element;
 
-	if (index >= size){
+	if (index >= size()){
 	    size = index + 1;
 	}
 
@@ -94,7 +94,7 @@ public class SuperArray{
 
     public void add(int index, int element){
 	if (index < 0 || index > size){
-	    throw new IndexOutOfBoundsException;
+	    throw new IndexOutOfBoundsException();
 	}
 	for (int i = size-1; i > index; i--){
 	    data[i] = data[i-1];
@@ -106,12 +106,12 @@ public class SuperArray{
     }
 
     public int remove(int index){
-	if (index < 0 || index > size){
-	    throw new IndexOutOfBoundsException;
+	if (index < 0 || index > size()){
+	    throw new IndexOutOfBoundsException();
 	}
 	int out = data[index];
 
-	for (int i = index; i < size-1; i++){
+	for (int i = index; i < size()-1; i++){
 	    data[i] = data[i+1];
 	}
 
@@ -120,9 +120,9 @@ public class SuperArray{
     }
 
     public int[] toArray(){
-	int[] out = new int[size];
+	int[] out = new int[size()];
 
-	for (int i = 0; i < size; i++){
+	for (int i = 0; i < size(); i++){
 	    out[i] = data[i];
 	}
 
@@ -130,7 +130,7 @@ public class SuperArray{
     }
 
     public int indexOf(int i){
-	for (int j = 0; j < size; j++){
+	for (int j = 0; j < size(); j++){
 	    if (data[j] == i){
 		return j;
 	    }
@@ -139,7 +139,7 @@ public class SuperArray{
     }
 
     public int lastIndexOf(int i){
-	for (int j = size-1; j >= 0; j--){
+	for (int j = size()-1; j >= 0; j--){
 	    if (data[j]==i){
 		return j;
 	    }
