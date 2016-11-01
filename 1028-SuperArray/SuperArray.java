@@ -8,6 +8,10 @@ public class SuperArray{
 	size = 0;
     }
 
+    public int getSize(){
+	return size;
+    }
+
     // 1.  Appends the specified element to the end of this list. It returns true (add this part)
 
      public boolean add(int n){
@@ -51,7 +55,7 @@ public class SuperArray{
 
     public String toString(){
         String out = "[ ";
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size-1; i++) {
 	    if (i == 0) {
 		out += String.valueOf(data[i]);
 	    } else {
@@ -117,8 +121,11 @@ public class SuperArray{
     // 9. Inserts the specified element at the specified position in this list. Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 
     public void add(int index, int element){
-	for (int i = size; i > index; i--){
+	for (int i = size-1; i > index; i--){
+
 	    data[i] = data[i-1];
+	    
+
 	}
 	data[index] = element;
 	size++;
@@ -128,7 +135,7 @@ public class SuperArray{
 
     public int remove(int index){
 	int out = data[index];
-	for (int i = index; i < size; i++){
+	for (int i = index; i < size-2; i++){
 	    data[i] = data[i+1];
 	}
 	size--;
@@ -150,7 +157,7 @@ public class SuperArray{
     // 12. Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
 
     public int indexOf(int i){
-	for (int x = 0; x < size; x++) {
+	for (int x = 0; x < size-1; x++) {
 	    if (i == data[x]) {
 		return x;
 	    }
@@ -161,7 +168,7 @@ public class SuperArray{
     // 13. Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
 
     public int lastIndexOf(int i){
-	for (int x = size - 1; x >= 0; x--){
+	for (int x = size - 2; x >= 0; x--){
 	    if (i == data[x]){
 		return x;
 	    }
