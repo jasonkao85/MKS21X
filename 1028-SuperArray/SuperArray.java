@@ -15,6 +15,12 @@ public class SuperArray{
 	data = new int[initialCapacity];
 	size = 0;
     }
+	
+    public SuperArray(int[] ary){
+        for (int i = 0; i < ary.length; i++){
+            data[i] = ary[i];
+        }
+    }
     
     public void grow(){
         int[] temp = new int[data.length*2];
