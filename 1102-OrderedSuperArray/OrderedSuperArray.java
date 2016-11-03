@@ -10,6 +10,10 @@ public class OrderedSuperArray extends SuperArray{
 
     public OrderedSuperArray(int[] ary){
 	super();
+
+	for (int i = 0; i < ary.length; i++){
+	    add(ary[i]);
+	}
     }
 
     private int placeIndex(int n){
@@ -19,7 +23,7 @@ public class OrderedSuperArray extends SuperArray{
 		return i;
 	    }
 	}
-
+	    
 	if (n > get(size()-1)){
 	    return size();
 	}

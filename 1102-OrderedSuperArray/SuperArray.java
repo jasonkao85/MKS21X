@@ -17,6 +17,8 @@ public class SuperArray{
     }
 	
     public SuperArray(int[] ary){
+	data = new int[ary.length];
+		
         for (int i = 0; i < ary.length; i++){
             data[i] = ary[i];
         }
@@ -30,6 +32,10 @@ public class SuperArray{
 	data = temp;
     }
 
+    public void addSize(){
+	size++;
+    }
+
     public boolean add(int element){
 	if (size() == data.length){
 	    grow();
@@ -41,7 +47,7 @@ public class SuperArray{
     }
 
     public int get(int index){
-	if (index < 0 || index >= size()){
+	if (index < 0 || index >= data.length){
 	    throw new IndexOutOfBoundsException();
 	}
 	return data[index];
