@@ -31,4 +31,12 @@ public class OrderedSuperArray extends SuperArray{
 	return true;
     }
 
+    public void add(int index, int element){
+	throw new UnsupportedOperationException();
+    }
+
+    public int set(int index, int element){
+	throw new UnsupportedOperationException();
+    }
+
 }
