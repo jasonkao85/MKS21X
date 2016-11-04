@@ -32,10 +32,6 @@ public class SuperArray{
 	data = temp;
     }
 
-    public void addSize(){
-	size++;
-    }
-
     public boolean add(int element){
 	if (size() == data.length){
 	    grow();

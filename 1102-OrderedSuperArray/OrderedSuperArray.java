@@ -24,7 +24,7 @@ public class OrderedSuperArray extends SuperArray{
 	    }
 	}
 	    
-	if (n > get(size()-1)){
+	if (size() > 0 && n > get(size()-1)){
 	    return size();
 	}
 	return 0;
