@@ -2,6 +2,14 @@ public class Driver{
 
     public static void main(String[]args){
 
+
+	int[]param = new int[10];
+        for(int i = 0; i < param.length;i++){
+            param[i] = (int)(Math.random() * 500);
+        }
+        OrderedSuperArray test2 = new OrderedSuperArray(param);
+        System.out.println(test2);
+	/*
 	SuperArray jefferson = new SuperArray();
 
 	for (int i = 0; i < 10; i++){
@@ -27,7 +35,7 @@ public class Driver{
 	}
 	OrderedSuperArray harrison = new OrderedSuperArray(tyler);
 	System.out.println(harrison);
-
+	*/
     }
 
 }

@@ -104,7 +104,7 @@ public class SuperArray{
 	if (index < 0 || index > data.length){
 	    throw new IndexOutOfBoundsException();
 	}
-	for (int i = size-1; i > index; i--){
+	for (int i = size()-1; i > index; i--){
 	    data[i] = data[i-1];
 	}
 

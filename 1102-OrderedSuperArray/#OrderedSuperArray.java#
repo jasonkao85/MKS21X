@@ -11,9 +11,7 @@ public class OrderedSuperArray extends SuperArray{
     public OrderedSuperArray(int[] ary){
 	super();
 
-	for (int i = 0; i < ary.length; i++){
-	    add(ary[i]);
-	}
+        for (int i = 0;
     }
 
     private int placeIndex(int n){
