@@ -13,22 +13,7 @@ public class OrderedSuperArray extends SuperArray{
 	for (int i = 0; i < ary.length; i++){
 	    add(ary[i]);
 	}	   
-    }
-
-    public String[] arrayRemove(String[] ary, String n){
-	String[] out = new String[ary.length-1];
-        int i = 0;
-	int j = 0;
-	while (i < ary.length){
-	    if (!(ary[i].equals(n))){
-		out[j] = ary[i];
-		j++;
-	    }
-	    i++;
-	}
-	return out;
-    }
-		
+    }		
 
     private int placeIndex(String n){
 
