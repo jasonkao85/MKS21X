@@ -2,40 +2,24 @@ public class Driver{
 
     public static void main(String[]args){
 
+        OrderedSuperArray test1 = new OrderedSuperArray();
+test1.add("hello");
+test1.add("there there");
+test1.add("Waffles");
+test1.add("Pancakes");
+test1.add("French Toast");
+//test1.add(2,"Cereal"); // Should return an error
+System.out.println(test1);
+//test1.set(3,"Sausage"); // Also should return an error
+System.out.println(test1.get(4)); // "there there"
+System.out.println(test1.indexOf("French Toast")); // "0"
+test1.add("hello");
+System.out.println(test1.lastIndexOf("hello")); // "4"
 
-	int[]param = new int[10];
-        for(int i = 0; i < param.length;i++){
-            param[i] = (int)(Math.random() * 500);
-        }
-        OrderedSuperArray test2 = new OrderedSuperArray(param);
-        System.out.println(test2);
-	/*
-	SuperArray jefferson = new SuperArray();
-
-	for (int i = 0; i < 10; i++){
-	    jefferson.add(i);
-	    jefferson.get(i);
-	    jefferson.set(i, i+10);
-	    jefferson.add(i, i-10);
-	    System.out.println(jefferson);
-	    System.out.println(jefferson.toStringDebug());
-	}
-
-	for (int i = 0; i < jefferson.size(); i++){
-	    jefferson.remove(i);
-	    jefferson.add(i, 85);
-	    System.out.println(jefferson);
-	}
-
-	System.out.println("\nOrdered Super Array:");
-	
-	int[] tyler = new int[10];
-	for (int i = 0; i < tyler.length; i++){
-	    tyler[i] = i;
-	}
-	OrderedSuperArray harrison = new OrderedSuperArray(tyler);
-	System.out.println(harrison);
-	*/
+String[] tempTest = new String[7];
+tempTest[0] = "Glock"; tempTest[1] = "Apple"; tempTest[2] = "Carrot"; tempTest[3] = "Eggplant"; tempTest[4] = "Firecracker"; tempTest[5] = "Bazinga"; tempTest[6] = "Donkey";
+OrderedSuperArray test2 = new OrderedSuperArray(tempTest);
+System.out.println(test2);       
     }
 
 }

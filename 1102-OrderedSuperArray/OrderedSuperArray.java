@@ -5,32 +5,42 @@ public class OrderedSuperArray extends SuperArray{
     }
 
     public OrderedSuperArray(int capacity){
-	super();
+	super(capacity);
     }
 
-    public OrderedSuperArray(int[] ary){
-	super();
-
+    public OrderedSuperArray(String[] ary){
+	super(ary.length);
 	for (int i = 0; i < ary.length; i++){
 	    add(ary[i]);
-	}
+	}	   
     }
 
-    private int placeIndex(int n){
-	
-	for (int i = 0; i < size()-1; i++){
-	    if (get(i) <= n && n <= get(i+1)){
+    public String[] arrayRemove(String[] ary, String n){
+	String[] out = new String[ary.length-1];
+        int i = 0;
+	int j = 0;
+	while (i < ary.length){
+	    if (!(ary[i].equals(n))){
+		out[j] = ary[i];
+		j++;
+	    }
+	    i++;
+	}
+	return out;
+    }
+		
+
+    private int placeIndex(String n){
+
+	for (int i = 0; i < size(); i++){
+	    if (get(i).compareTo(n) >= 0){
 		return i;
 	    }
 	}
-	    
-	if (size() > 0 && n > get(size()-1)){
-	    return size();
-	}
-	return 0;
+	return size();
     }
 
-    public boolean add(int i){
+    public boolean add(String i){
 	super.add(placeIndex(i),i);
 	return true;
     }

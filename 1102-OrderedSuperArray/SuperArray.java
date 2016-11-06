@@ -1,10 +1,10 @@
 public class SuperArray{
 
-    private int[] data;
+    private String[] data;
     private int size;
 
     public SuperArray(){
-	data = new int[10];
+	data = new String[10];
 	size = 0;
     }
 
@@ -12,12 +12,12 @@ public class SuperArray{
 	if (initialCapacity < 0){
 	    throw new IllegalArgumentException();
 	}
-	data = new int[initialCapacity];
+	data = new String[initialCapacity];
 	size = 0;
     }
 	
-    public SuperArray(int[] ary){
-	data = new int[ary.length];
+    public SuperArray(String[] ary){
+	data = new String[ary.length];
 		
         for (int i = 0; i < ary.length; i++){
             data[i] = ary[i];
@@ -25,14 +25,14 @@ public class SuperArray{
     }
     
     public void grow(){
-        int[] temp = new int[data.length*2];
+        String[] temp = new String[data.length*2];
 	for (int i = 0; i < size(); i++) {
 	    temp[i] = data[i];
 	}
 	data = temp;
     }
 
-    public boolean add(int element){
+    public boolean add(String element){
 	if (size() == data.length){
 	    grow();
 	}
@@ -42,7 +42,7 @@ public class SuperArray{
 	return true;
     }
 
-    public int get(int index){
+    public String get(int index){
 	if (index < 0 || index >= data.length){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -54,21 +54,29 @@ public class SuperArray{
     }
 
     public String toString(){
+	if (isEmpty()){
+	    return "";
+	}
+	
 	String out = "[ ";
 
 	for (int i = 0; i < size(); i++){
-	    out += String.valueOf(data[i]) + ", ";
+	    out += data[i] + ", ";
 	}
 
 	return out.substring(0,out.length()-2).concat("]");
     }
 
     public String toStringDebug(){
+	if (isEmpty()){
+	    return "";
+	}
+    
         String out = "[ ";
 
 	for (int i = 0; i < data.length; i++){
 	    if (i < size()){
-		out += String.valueOf(data[i]) + ", ";
+		out += data[i] + ", ";
 	    } else {
 		out += "_, ";
 	    }
@@ -85,26 +93,25 @@ public class SuperArray{
 	return size() == 0;
     }
 
-    public int set(int index, int element){
+    public String set(int index, String element){
 	if (index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	int out = data[index];
+	String out = data[index];
 
 	data[index] = element;
-
-	if (index >= size()){
-	    size = index + 1;
-	}
 
 	return out;
     }
 
-    public void add(int index, int element){
-	if (index < 0 || index > data.length){
+    public void add(int index, String element){
+	if (index < 0 || index > size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	for (int i = size()-1; i > index; i--){
+	if (size() == data.length){
+		grow();
+	    }
+	for (int i = size(); i > index; i--){
 	    data[i] = data[i-1];
 	}
 
@@ -113,13 +120,17 @@ public class SuperArray{
         size++;
     }
 
-    public int remove(int index){
+    public String remove(int index){
 	if (index < 0 || index > size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	int out = data[index];
-
-	for (int i = index; i < size()-1; i++){
+	String out = data[index];
+	System.out.println(String.valueOf(index));
+	
+	for (int i = index; i < size(); i++){
+	    if (size() == data.length){
+		grow();
+	    }
 	    data[i] = data[i+1];
 	}
 
@@ -127,8 +138,8 @@ public class SuperArray{
 	return out;
     }
 
-    public int[] toArray(){
-	int[] out = new int[size()];
+    public String[] toArray(){
+	String[] out = new String[size()];
 
 	for (int i = 0; i < size(); i++){
 	    out[i] = data[i];
@@ -137,18 +148,18 @@ public class SuperArray{
 	return out;
     }
 
-    public int indexOf(int i){
+    public int indexOf(String i){
 	for (int j = 0; j < size(); j++){
-	    if (data[j] == i){
+	    if (data[j].equals(i)){
 		return j;
 	    }
 	}
 	return -1;
     }
 
-    public int lastIndexOf(int i){
+    public int lastIndexOf(String i){
 	for (int j = size()-1; j >= 0; j--){
-	    if (data[j]==i){
+	    if (data[j].equals(i)){
 		return j;
 	    }
 	}
