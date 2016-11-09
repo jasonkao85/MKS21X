@@ -1,4 +1,34 @@
-# apcs
+# hi karen
+
+###11-09-16: abstract classes
+**abstract class:** a class that CANNOT BE INSTANTIATED (cannot call new AbstractClass();) but can be extended. (opposite of abstract is concrete)  
+
+Shape is abstract--there are things it must do (getArea()) but until we extend it and know more about its child, we cannot do it.  
+
+abstract methods:  
+- can only be put into abstract classes, but abstract classes can contain concrete methods
+- ARE NOT PUBLIC because they are not directly called
+- when it is subclassed, either:
+    - implement all abstract methods (and now they are concrete and callable)
+    - alternately, inherit them as abstract methods, but your subclass has to be abstract (if this is not the case, COMPILE TIME ERROR)
+- inheritance/sharing code yay! don't have to implement code yet, until you have more fields in your subclass
+```
+public abstract Shape{
+    className(){}
+    abstract getArea(); // note the syntax
+    abstract getPerimeter();
+    public double getSemiPerimeter(){} // not abstract b/c concrete methods can call abstract methods
+}
+```
+technicalities:
+```
+Shape n;
+Shape[] stuff = new Shape[10] // legal, as long as you don't call new Shape();
+
+n = new Circle(); // allowed b/c inheritance rules: circle is subclass of shape
+Stuff[0] = n;
+Stuff[0].getRadius() // illegal b/c inheritance rules: superclass cannot call subclass's methods/fields; would result in RUNTIME ERROR
+```
 
 ###10-28-16: SuperArray
 
