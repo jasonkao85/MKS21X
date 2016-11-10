@@ -23,11 +23,11 @@ public class Circle extends Shape{
 	}
     }
 
-    public double getRadius(double r){
+    public double getRadius(){
 	return radius;
     }
 
     public String toString(){
-	return "A Circle with radius=" + radius + ", which is a subclass of " + super.toString();
+	return "A Circle with radius=" + getRadius() + ", which is a subclass of " + super.toString();
     }
 }

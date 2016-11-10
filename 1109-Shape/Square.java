@@ -25,6 +25,6 @@ public class Square extends Rectangle{
     }
 
     public String toString(){
-	return "A Square with side=" + width + ", which is a subclass of " + super.toString();
+	return "A Square with side=" + getWidth() + ", which is a subclass of " + super.toString();
     }
 }
