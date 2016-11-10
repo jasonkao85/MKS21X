@@ -1,4 +1,4 @@
-# hi karen
+# apcs
 
 ###11-09-16: abstract classes
 **abstract class:** a class that CANNOT BE INSTANTIATED (cannot call new AbstractClass();) but can be extended. (opposite of abstract is concrete)  
