@@ -2,11 +2,6 @@
      
     private char[][] data;
 
-    /**Initialize the grid to the size specified 
-     *fill all of the positions with '_'
-     *@param row is the starting height of the WordSearch
-     *@param col is the starting width of the WordSearch
-     */
     public WordSearch(int rows,int cols){
 	data = new char[rows][cols];
 	for (int i = 0; i < rows; i++){
@@ -16,7 +11,6 @@
 	}
     }
 
-    /**Set all values in the WordSearch to underscores'_'*/
     private void clear(){
 	for (int i = 0; i < data.length; i++){
 	    for (int j = 0; j < data[i].length; j++){
@@ -25,10 +19,6 @@
 	}
     }
 
-    /**The proper formatting for a WordGrid is created in the toString.
-     *@return a String with each character separated by spaces, and rows
-     *separated by newlines.
-     */
     public String toString(){
 	String o = "";
 	for (int i = 0; i < data.length; i++){
@@ -40,19 +30,8 @@
 	return o;
     }
 
-
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from left to right, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
-     *@param col is the horizontal location of where you want the word to start.
-     *@return true when the word is added successfully. When the word doesn't fit,
-     *or there are overlapping letters that do not match, then false is returned.
-     */
     public boolean addWordHorizontal(String word,int row, int col){
-	if (col + word.length() >= data[row].length){
+	if (col + word.length() > data[row].length){
 	    return false;
 	}
 	
@@ -66,19 +45,8 @@
 	
 	return true;			    
     }
-
-   /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from top to bottom, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
-     *@param col is the horizontal location of where you want the word to start.
-     *@return true when the word is added successfully. When the word doesn't fit,
-     *or there are overlapping letters that do not match, then false is returned.
-     */
     public boolean addWordVertical(String word,int row, int col){
-        if (row + word.length() >= data.length){
+        if (row + word.length() > data.length){
 	    return false;
 	}
 	
@@ -92,6 +60,5 @@
 	
 	return true;
     }
-
 
 }
