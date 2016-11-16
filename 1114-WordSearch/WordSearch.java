@@ -62,9 +62,7 @@ public class WordSearch{
 	randgen = new Random();
 	int row, col, dRow, dCol;
 
-        int len = wordsToAdd.size();
-	int i = 0;
-	while (i < len){
+	while (wordsToAdd.size() > 0){
 	    row = randgen.nextInt(data.length);
 	    col = randgen.nextInt(data[0].length);
 	    dRow = randgen.nextInt(3)-1;
