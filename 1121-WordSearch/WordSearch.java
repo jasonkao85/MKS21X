@@ -9,26 +9,58 @@ public class WordSearch{
     private Random randgen;
     private ArrayList<String> wordsToAdd;
     private ArrayList<String> wordsAdded;
-
+  
     public static void main(String[]args){
-	WordSearch badminton = new WordSearch(10,10,"words.txt");
-	System.out.println(badminton);
+	WordSearch w;
+	int seed;
+	if (args.length == 3){
+	    seed = (int) (Math.random()*100000);
+	    w = new WordSearch(args[0],args[1],args[2],seed,false);
+	    System.out.println(w);
+	}
+	else if (args.length == 4){
+	    try {
+		seed = Integer.parseInt(args[3]);
+		w = new WordSearch(args[0],args[1],args[2],seed,false);
+		System.out.println(w);
+	    } catch (NumberFormatException e) {
+		System.out.println("Invalid input.");
+		System.exit(1);
+	    }	    
+	}
+	else if (args.length == 5){
+	    try {
+		seed = Integer.parseInt(args[3]);
+		w = new WordSearch(args[0],args[1],args[2],seed,args[4].equals("key"));
+		System.out.println(w);
+	    } catch (NumberFormatException e) {
+		System.out.println("Invalid seed input.");
+		System.exit(1);
+	    }	    
+	}
+	else {
+	    w = new WordSearch();
+	}	
     }
 
     public WordSearch(){
-	System.out.println("usage: java Driver [rows cols filename [randomSeed [answers]]]");
+	System.out.println("usage: java Driver [rows cols filename [randomSeed [answers]]]");       
     }
 
-    public WordSearch(int rows,int cols,String filename){
+    public WordSearch(String rowNum,String colNum,String filename,int seed,boolean key){
+	int rows = Integer.parseInt(rowNum);
+	int cols = Integer.parseInt(colNum);
+
 	data = new char[rows][cols];
 	wordsToAdd = new ArrayList<String>();
-	wordsAdded = new ArrayList<String>();
-	loadWords(filename);
+	wordsAdded = new ArrayList<String>();	
         clear();
-	fillWithWords();
-    }
+	loadWords(filename);
+	System.out.println("seed: "+seed);
+	randgen = new Random(seed);
 
-    public WordSearch(int rows,int cols,String filename,int randomSeed){
+	fillWithWords();
+	if (!key) fillWithTrash();
     }
     
     private void clear(){
@@ -46,7 +78,7 @@ public class WordSearch{
 		 wordsToAdd.add(in.nextLine().toUpperCase());
 	     }
 	}catch (FileNotFoundException e){
-	    System.out.println("File Not Found");
+	    System.out.println("Invalid filename or path.");
 	    System.exit(1);
 	}		
     }
@@ -72,11 +104,16 @@ public class WordSearch{
 	return o;
     }
 
-    public void fillWithWords(){
-	randgen = new Random();
+    private void fillWithWords(){
 	int row, col, dRow, dCol;
 
 	while (wordsToAdd.size() > 0){
+
+	    if (wordsToAdd.get(0).length() > data.length  && wordsToAdd.get(0).length() > data[0].length){
+		System.out.println("Uh oh! Make sure your words can fit within your boundaries.");
+		System.exit(0);
+	    }
+	    
 	    row = randgen.nextInt(data.length);
 	    col = randgen.nextInt(data[0].length);
 	    dRow = randgen.nextInt(3)-1;
@@ -88,11 +125,21 @@ public class WordSearch{
 		dRow = randgen.nextInt(3)-1;
 		dCol = randgen.nextInt(3)-1;		 
 	    }
-	    System.out.println(wordsToAdd.get(0));
-	    System.out.println(""+row+" "+col+" "+dRow+" "+dCol+"\n\n");
+	    //System.out.println(wordsToAdd.get(0));
+	    //System.out.println(""+row+" "+col+" "+dRow+" "+dCol+"\n\n");
 	    addWord(wordsToAdd.get(0),row,col,dRow,dCol);
 	    wordsAdded.add(wordsToAdd.get(0));
 	    wordsToAdd.remove(0);
+	}
+    }
+
+    private void fillWithTrash(){
+	for (int i = 0; i < data.length; i++){
+	    for (int j = 0; j < data[i].length; j++){
+		if (data[i][j] == '_'){
+		    data[i][j] = (char) (65 + randgen.nextInt(26));
+		}
+	    }
 	}
     }
 
