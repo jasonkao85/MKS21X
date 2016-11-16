@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.io.*;
 import java.util.Scanner;
@@ -11,6 +10,11 @@ public class WordSearch{
     private ArrayList<String> wordsToAdd;
     private ArrayList<String> wordsAdded;
 
+    public static void main(String[]args){
+	WordSearch badminton = new WordSearch(10,10,"words.txt");
+	System.out.println(badminton);
+    }
+
     public WordSearch(){
 	System.out.println("usage: java Driver [rows cols filename [randomSeed [answers]]]");
     }
@@ -19,13 +23,12 @@ public class WordSearch{
 	data = new char[rows][cols];
 	wordsToAdd = new ArrayList<String>();
 	wordsAdded = new ArrayList<String>();
-	loadWords();
+	loadWords(filename);
         clear();
 	fillWithWords();
     }
 
     public WordSearch(int rows,int cols,String filename,int randomSeed){
-	this.WordSearch(int rows,int cols,String filename);
     }
     
     private void clear(){
@@ -85,14 +88,18 @@ public class WordSearch{
 		dRow = randgen.nextInt(3)-1;
 		dCol = randgen.nextInt(3)-1;		 
 	    }
+	    System.out.println(wordsToAdd.get(0));
+	    System.out.println(""+row+" "+col+" "+dRow+" "+dCol+"\n\n");
 	    addWord(wordsToAdd.get(0),row,col,dRow,dCol);
 	    wordsAdded.add(wordsToAdd.get(0));
 	    wordsToAdd.remove(0);
-	    i++;
 	}
     }
 
     public boolean canAdd(String word,int row,int col,int dRow,int dCol){
+	if (dRow == 0 && dCol == 0){
+	    return false;
+	}
 	try { 
 	    for (int j = 0; j < word.length(); j++){
 		if (data[row+j*dRow][col+j*dCol] != '_' && data[row+j*dRow][col+j*dCol] != word.charAt(j)){
