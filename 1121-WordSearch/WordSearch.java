@@ -1,7 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.io.*;
-import java.util.Scanner;
-import java.util.Random;
 
 public class WordSearch{
      
@@ -34,7 +32,7 @@ public class WordSearch{
 		w = new WordSearch(args[0],args[1],args[2],seed,args[4].equals("key"));
 		System.out.println(w);
 	    } catch (NumberFormatException e) {
-		System.out.println("Invalid seed input.");
+		System.out.println("Invalid input.");
 		System.exit(1);
 	    }	    
 	}
@@ -44,7 +42,7 @@ public class WordSearch{
     }
 
     public WordSearch(){
-	System.out.println("usage: java Driver [rows cols filename [randomSeed [answers]]]");       
+	System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");       
     }
 
     public WordSearch(String rowNum,String colNum,String filename,int seed,boolean key){
@@ -54,13 +52,13 @@ public class WordSearch{
 	data = new char[rows][cols];
 	wordsToAdd = new ArrayList<String>();
 	wordsAdded = new ArrayList<String>();	
+
         clear();
 	loadWords(filename);
-	System.out.println("seed: "+seed);
 	randgen = new Random(seed);
-
 	fillWithWords();
 	if (!key) fillWithTrash();
+	System.out.println("seed: "+seed);
     }
     
     private void clear(){
