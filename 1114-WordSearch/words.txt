@@ -1,0 +1,9 @@
+birdie
+shuttle
+racket
+net
+drop
+smash
+lift
+clear
+drive
