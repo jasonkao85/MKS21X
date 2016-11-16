@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.io.*;
 import java.util.Scanner;
@@ -10,11 +11,21 @@ public class WordSearch{
     private ArrayList<String> wordsToAdd;
     private ArrayList<String> wordsAdded;
 
-    public WordSearch(int rows,int cols){
+    public WordSearch(){
+	System.out.println("usage: java Driver [rows cols filename [randomSeed [answers]]]");
+    }
+
+    public WordSearch(int rows,int cols,String filename){
 	data = new char[rows][cols];
 	wordsToAdd = new ArrayList<String>();
 	wordsAdded = new ArrayList<String>();
+	loadWords();
         clear();
+	fillWithWords();
+    }
+
+    public WordSearch(int rows,int cols,String filename,int randomSeed){
+	this.WordSearch(int rows,int cols,String filename);
     }
     
     private void clear(){
