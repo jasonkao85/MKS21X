@@ -102,21 +102,25 @@ public class WordSearch{
 	return o;
     }
 
+    
     private void fillWithWords(){
 	int row, col, dRow, dCol;
 
 	while (wordsToAdd.size() > 0){
 
+	    
+
 	    if (wordsToAdd.get(0).length() > data.length  && wordsToAdd.get(0).length() > data[0].length){
-		System.out.println("Uh oh! Make sure your words can fit within your boundaries.");
-		System.exit(0);
+		System.out.println(wordsToAdd.get(0) + " does not fit in your dimensions.");
+		continue;
 	    }
 	    
 	    row = randgen.nextInt(data.length);
 	    col = randgen.nextInt(data[0].length);
 	    dRow = randgen.nextInt(3)-1;
 	    dCol = randgen.nextInt(3)-1;	    
-	    
+
+	    // generates new random coords and rates until it works
 	    while (!canAdd(wordsToAdd.get(0),row,col,dRow,dCol)){
 		row = randgen.nextInt(data.length);
 		col = randgen.nextInt(data[0].length);
@@ -131,6 +135,7 @@ public class WordSearch{
 	}
     }
 
+    // finds all empty spaces and fills with A-Z
     private void fillWithTrash(){
 	for (int i = 0; i < data.length; i++){
 	    for (int j = 0; j < data[i].length; j++){
