@@ -7,5 +7,3 @@ git config --global user.email | sets your local email
 git add [-A] | adds your changes
 git commit [-a] -m "yourmessage" | locks your changes
 git push | updates Github with your changes
-
-Github is cool!
