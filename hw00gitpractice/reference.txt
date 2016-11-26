@@ -1,3 +1,4 @@
+git config --list | shows all configurations of github
 git clone <ssh> | clones a repository into your directory
 git pull | updates the repository on your computer
 git status | displays the status of your changes
