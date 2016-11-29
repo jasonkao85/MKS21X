@@ -1,9 +1,0 @@
-git config --list | shows all configurations of github
-git clone <ssh> | clones a repository into your directory
-git pull | updates the repository on your computer
-git status | displays the status of your changes
-git config --global user.name | sets your local name
-git config --global user.email | sets your local email
-git add [-A] | adds your changes
-git commit [-a] -m "yourmessage" | locks your changes
-git push | updates Github with your changes
