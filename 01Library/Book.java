@@ -38,4 +38,10 @@ public class Book {
 	this.ISBN = ISBN;
     }
 
+    public void toString(){
+	System.out.println("\n"+title);
+	System.out.println("by "+author);
+	System.out.println("ISBN: "+ISBN+"\n");
+    }
+
 }
