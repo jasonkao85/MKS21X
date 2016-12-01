@@ -1,5 +1,14 @@
 # apcs
 
+###12-09-16: enhanced for loops
+```
+for (int v : numbers){
+    S.o.pln(v);
+}
+```
+- cannot change an array like this, unless array's types are mutable (Objects, cars, NOT: Strings, ints)
+
+
 ###11-09-16: abstract classes
 **abstract class:** a class that CANNOT BE INSTANTIATED (cannot call new AbstractClass();) but can be extended. (opposite of abstract is concrete)  
 
