@@ -15,8 +15,9 @@ public class SuperArrayIterator implements Iterator<String>{
 
     public String next(){
 	if (hasNext()){
+	    String o = ary.get(current);
 	    current++;
-	    return ary.get(current);
+	    return o;
 	} else{
 	    throw new NoSuchElementException();
 	}
@@ -197,8 +198,7 @@ class SuperArray implements Iterable<String>{
     }
 
     public Iterator<String> iterator(){
-	return new SuperArrayIterator(data);
+	return new SuperArrayIterator(this);
     }
 
 }
- 
