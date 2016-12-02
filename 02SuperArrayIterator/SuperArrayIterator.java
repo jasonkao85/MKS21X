@@ -3,16 +3,10 @@ import java.util.*;
 public class SuperArrayIterator implements Iterator<String>{
 
     private SuperArray ary;
-    private int current;
-    
-    public SuperArrayIterator(){
-	ary = null;
-	current = 0;
-    }
+    private int current = 0;
 
-    public SuperArrayIterator(SuperArray ary,int current){
+    public SuperArrayIterator(SuperArray ary){
 	this.ary = ary;
-	this.current = current;
     }
 
     public boolean hasNext(){
@@ -34,7 +28,7 @@ public class SuperArrayIterator implements Iterator<String>{
 
 }
 
-class SuperArray{
+class SuperArray implements Iterable<String>{
 
     private String[] data;
     private int size;
@@ -200,6 +194,10 @@ class SuperArray{
 	    }
 	}
 	return -1;
+    }
+
+    public Iterator<String> iterator(){
+	return new SuperArrayIterator(data);
     }
 
 }
