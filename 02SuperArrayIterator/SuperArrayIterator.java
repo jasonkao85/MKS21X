@@ -1,7 +1,9 @@
-public interface SuperArrayIterator implements Iterator<String>{
+import java.util.*;
 
-    SuperArray ary;
-    int current;
+public class SuperArrayIterator implements Iterator<String>{
+
+    private SuperArray ary;
+    private int current;
     
     public SuperArrayIterator(){
 	ary = null;
@@ -14,7 +16,7 @@ public interface SuperArrayIterator implements Iterator<String>{
     }
 
     public boolean hasNext(){
-	return start < end;
+	return current < ary.size();
     }
 
     public String next(){
