@@ -1,4 +1,36 @@
-public
+public interface SuperArrayIterator implements Iterator<String>{
+
+    SuperArray ary;
+    int current;
+    
+    public SuperArrayIterator(){
+	ary = null;
+	current = 0;
+    }
+
+    public SuperArrayIterator(SuperArray ary,int current){
+	this.ary = ary;
+	this.current = current;
+    }
+
+    public boolean hasNext(){
+	return start < end;
+    }
+
+    public String next(){
+	if (hasNext()){
+	    current++;
+	    return ary.get(current);
+	} else{
+	    throw new NoSuchElementException();
+	}
+    }
+
+    public void remove(){
+	throw new UnsupportedOperationException();
+    }
+
+}
 
 class SuperArray{
 
