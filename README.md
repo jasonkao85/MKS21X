@@ -1,6 +1,12 @@
 # apcs
 
-###12-09-16: enhanced for loops
+###12-06-16: ArrayLists
+```
+i --> (i / cols, i % side) // very common mapping for 2D Array represented by 1D Array
+(r, c) --> r * cols + c // is the inverse to the previous mapping
+```
+
+###12-02-16: enhanced for loops
 ```
 for (int v : numbers){
     S.o.pln(v);
