@@ -9,7 +9,7 @@ public class BarCode implements Comparable<Barcode>{
     //               or zip contains a non digit
     //               _zip and _checkDigit are initialized.
     public Barcode(String zip) {
-	
+	_zip = zip;
     }
   
 
@@ -20,7 +20,10 @@ public class BarCode implements Comparable<Barcode>{
     // postcondition: computes and returns the check sum for _zip
     private int checkSum(){
 	int s = 0;
-	for (char c
+	for (char c : _zip){
+	    s += parseInt(c);
+	}
+	return s;
     }
 
     //postcondition: format zip + check digit + barcode 
