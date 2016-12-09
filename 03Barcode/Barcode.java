@@ -39,7 +39,7 @@ public class Barcode implements Comparable<Barcode>{
     public String toString(){
 	String o = _zip + _checkDigit + "  |";
 	for (int i = 0; i <= _zip.length(); i++) {
-	    String b = Integer.toBinaryString((_zip + _checkDigit).charAt(i) - '0');
+	    char c = (_zip + _checkDigit).charAt(i) - '0';
 	    switch (c) {
 	    case '0': o += "||:::"; break;	           	    
 	    case '1': o += ":::||"; break;
