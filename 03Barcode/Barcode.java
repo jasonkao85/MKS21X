@@ -9,8 +9,7 @@ public class Barcode implements Comparable<Barcode>{
 
     public Barcode(String zip) {
 	if (!zip.matches("[0-9]{5}")) {
-	    System.out.println("Invalid zipcode " + zip + ".");
-	    throw new RuntimeException();
+	    throw new IllegalArgumentException("Zipcode is not correct length or contains illegal characters.");
 	}		
 	_zip = zip;
 	_checkDigit = this.checkSum(_zip) % 10;
@@ -37,17 +36,19 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     public static String toCode(String zip) {
-
+        if (!zip.matches("[0-9]{5}")) {
+	    throw new IllegalArgumentException("Zipcode is not correct length or contains illegal characters.");
+	}
 	zip += checkSum(zip) % 10;
 	
         String o = "|";
 	for (int i = 0; i < zip.length(); i++) {
-	    o += scheme[(zip).charAt(i) - '0']; // doesn't need this.method() b/c method is static  
+	    o += scheme[zip.charAt(i) - '0']; // doesn't need this.method() b/c method is static  
         }
 	return o + "|";
     }
 
-    private static int schemeDigit(String s) {
+    private static int schemeDigit(String s) {	
 	for (int i = 0; i < scheme.length; i++) {
 	    if (scheme[i].equals(s)) return i;
 	}
