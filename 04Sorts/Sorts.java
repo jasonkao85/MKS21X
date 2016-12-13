@@ -25,6 +25,5 @@ public class Sorts {
 	    data[minIndex] = temp;
 	}
     }
-
 }
 	
