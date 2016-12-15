@@ -10,6 +10,11 @@ public class Driver {
 	System.out.println("-----INSERTION SORT-----");
 	Sorts.insertionSort(b);    
         System.out.println(toString(b));
+
+	int[] c = { 10, 3, 1, 5, 19, 10 };
+	System.out.println("-----BUBBLE SORT-----");
+	Sorts.bubbleSort(c);
+	System.out.println(toString(c));
     }
 
     public static String toString(int[] ary) {
