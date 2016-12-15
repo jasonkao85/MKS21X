@@ -1,18 +1,5 @@
 # apcs
 
-### 12-09-16: Barcode
-Static methods of a class can be called with:
-```
-className.myStaticMethod();
-```
-Methods that should be included:
-```
-static toCode(String zip);
-static toZip(String code);
-// possible errors: not num, failed checkSum, invalid char, invalid len, !|...|
-```
-static final: allows you to have constants over objects of the same class
-
 ###12-06-16: ArrayLists
 ```
 i --> (i / cols, i % side) // very common mapping for 2D Array represented by 1D Array
@@ -20,11 +7,6 @@ i --> (i / cols, i % side) // very common mapping for 2D Array represented by 1D
 ```
 
 ###12-02-16: enhanced for loops
-```
-for (int v : numbers){
-    S.o.pln(v);
-}
-```
 - cannot change an array like this, unless array's types are mutable (Objects, cars, NOT: Strings, ints)
 
 
