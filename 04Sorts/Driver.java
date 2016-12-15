@@ -5,7 +5,8 @@ public class Driver {
 	int[] a = { 10, 3, 1, 5, 19, 10 };
         int x = Integer.parseInt(args[0]);
 	String sortType = "whoops";
-	switch (x) {
+	int startTime = System.currentTimeMillis();
+       	switch (x) {
 	case 0: Sorts.selectionSort(a);
 	    sortType = "SELECTION"; break;
 	case 1: Sorts.insertionSort(a);
