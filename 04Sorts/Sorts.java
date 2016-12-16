@@ -33,12 +33,15 @@ public class Sorts {
     }
     
     public static void bubbleSort(int[] data) {
-	for (int i = data.length; i > 0; i--) {
+	boolean swapped;
+	for (int i = data.length; i > 0 && swapped; i--) {
+	    swapped = false;
 	    for (int j = 1; j < i; j++) {
 		if (data[j] < data[j-1]) {
 		    int temp = data[j-1];
 		    data[j-1] = data[j];
 		    data[j] = temp;
+		    swapped = true;
 		}
 	    }
 	}

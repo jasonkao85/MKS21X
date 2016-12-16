@@ -2,10 +2,15 @@ public class Driver {
     
     public static void main(String[] args) {
 	
-	int[] a = { 10, 3, 1, 5, 19, 10 };
+	int[] a = new int[Integer.parseInt(args[1])];
+	for (int i = 0; i < Integer.parseInt(args[1]); i++) {
+	    int randInt = (int) Math.random() * 100;
+	    a.add(randInt);
+	}
+
         int x = Integer.parseInt(args[0]);
 	String sortType = "whoops";
-	int startTime = System.currentTimeMillis();
+	long startTime = System.currentTimeMillis();
        	switch (x) {
 	case 0: Sorts.selectionSort(a);
 	    sortType = "SELECTION"; break;
